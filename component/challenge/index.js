@@ -3,7 +3,6 @@
 
 import millionAnswer from '../../ownApi/millionAnswer'
 
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
 
 import {apiFuhuo ,apiGetUser} from '../../ownApi/index.js'

@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 import millionAnswer from '../../ownApi/millionAnswer'
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
 
 import { apiGetRanking } from '../../ownApi/index.js'

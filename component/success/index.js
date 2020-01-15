@@ -2,7 +2,6 @@
 import Poster from '../../miniprogram_dist/poster/poster';
 import millionAnswer from '../../ownApi/millionAnswer'
 
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
 
 import {apiSubSubject,apiGetRanking ,apiGetUser, apiGetExchange ,apiShenqing} from '../../ownApi/index.js'
@@ -27,6 +26,7 @@ Page({
       "name": ""
     },
     lvtext:['黑铁','青铜','白银','黄金','钻石','星耀','王者'],
+    config:{}
   },
 
   onPosterSuccess(e) {
@@ -71,6 +71,70 @@ Page({
     millionAnswer.buildCode().then(data => {  //先生成小程序二维码，再请求排名数据
       let key = this.data.gift.key
       let answer = this.data.gift.answer
+
+      apiGetUser().then(res => {
+        let user = res.data
+          this.setData({
+            userData:res.data
+          })
+
+          let pos = this.data.config[`shareposter${user.level - 1}`]
+          console.log(pos)
+          console.log(this.data.config)
+          console.log(`shareposter${user.level - 1}`)
+
+           let posterConfig = {
+            width: 750,
+            height: 1127,
+            debug: false,
+            pixelRatio: 2,
+            texts: [
+              {  //昵称
+                x: 290,
+                y: 120,
+                baseLine: 'middle',
+                text: `${user.nickname}`,
+                textAlign:'center',
+                fontSize: 32,
+                color: '#333',
+              },
+            ],
+            images: [
+              {  //底图
+                width: 750,
+                height: 1127,
+                x: 0,
+                y: 0,
+                // url: `${baseUrl}/MiniProgram/images/postem.jpg`,
+                url: pos,
+              },
+              {  //头像
+                width: 150,
+                height: 150,
+                x: 45,
+                y: 50,
+                borderRadius:150,
+                borderColor:'#fff',
+                borderWidth:4,
+                url: `${user.pic}`,
+              },
+              {   //小程序二维码 
+                width: 120,
+                height: 120,
+                x: 560,
+                y: 950,
+                // url: `${data.data.url}`,
+                url: `${user.pic}`,
+              },
+            ]
+          }
+    
+          this.setData({ posterConfig: posterConfig }, () => {
+            Poster.create(true);    // 入参：true为抹掉重新生成
+          });
+      })
+
+      return
       apiSubSubject({key,user_answer:answer}).then(res => {
 
         if(res.error == 2){
@@ -81,123 +145,169 @@ Page({
           })
     
           // console.log(user.pic)
-    
-          let posterConfig = {
+          // let posterConfig = {
+          //   width: 662,
+          //   height: 1003,
+          //   debug: false,
+          //   pixelRatio: 2,
+          //   blocks: [
+          //   ],
+          //   texts: [
+          //     {
+          //       x: 320,
+          //       y: 380,
+          //       width: 200,
+          //       baseLine: 'middle',
+          //       text: `${user.nickname}`,
+          //       textAlign:'center',
+          //       fontSize: 32,
+          //       color: '#ffffff',
+          //     },
+          //     {
+          //       x: 130,
+          //       y: 450,
+          //       baseLine: 'middle',
+          //       text: `总排名:`,
+          //       textAlign:'center',
+          //       fontSize: 28,
+          //       color: '#ffffff',
+          //     },
+          //     {
+          //       x: 190,
+          //       y: 450,
+          //       baseLine: 'middle',
+          //       text: `${user.allpai}名`,
+          //       fontSize: 30,
+          //       color: '#ffd924',
+          //     },
+          //     {
+          //       x: 460,
+          //       y: 450,
+          //       baseLine: 'middle',
+          //       text: `好友排名:`,
+          //       textAlign: 'center',
+          //       fontSize: 28,
+          //       color: '#ffffff',
+          //     },
+          //     {
+          //       x: 530,
+          //       y: 450,
+          //       baseLine: 'middle',
+          //       text: `${user.haoyoupai}名`,
+          //       fontSize: 30,
+          //       color: '#ffd924',
+          //     },
+          //     {
+          //       x: 228,
+          //       y: 745,
+          //       baseLine: 'middle',
+          //       text: `${user.cos}ml`,
+          //       fontSize:100,
+          //       color: '#ffd924',
+          //       textAlign: 'center',
+          //       fontWeight:'bold'
+          //     },
+          //     {
+          //       x: 170,
+          //       y: 630,
+          //       baseLine: 'middle',
+          //       text: `获得汽油`,
+          //       fontSize: 45,
+          //       color: '#fff',
+          //       textAlign: 'center',
+          //     },
+          //     {
+          //       x: 280,
+          //       y: 200,
+          //       fontSize: 26,
+          //       color: '#a90410',
+          //       text: `${this.data.lvtext[user.level - 1]}LV${user.lvy}`,
+          //       zIndex:10
+          //     },
+          //   ],
+          //   images: [
+          //     {
+          //       width: 662,
+          //       height: 1003,
+          //       x: 0,
+          //       y: 0,
+          //       url: `${baseUrl}/MiniProgram/images/poster/window3.png`,
+          //     },
+          //     {
+          //       width: 150,
+          //       height: 150,
+          //       x: 250,
+          //       y: 200,
+          //       borderRadius:150,
+          //       borderColor:'#fff',
+          //       borderWidth:4,
+          //       url: `${user.pic}`,
+          //     },
+          //     {
+          //       width: 80 * 1.4,
+          //       height: 43 * 1.4,
+          //       x: 275,
+          //       y: 160,
+          //       url: `${baseUrl}/MiniProgram/images/poslv.png`,
+          //     },
+          //     // {   //小程序二维码 测试测试
+          //     //   width: 120,
+          //     //   height: 120,
+          //       // x: 180,
+          //       // y: 845,
+          //     //   url: `${data.data.url}`,
+          //     // },
+          //   ]
+          // }
+
+          let pos1 = this.data.config[`shareposter${user.level}`]
+          console.log(pos1)
+
+           let posterConfig = {
             width: 662,
             height: 1003,
             debug: false,
             pixelRatio: 2,
-            blocks: [
-    
-            ],
             texts: [
-              {
-                x: 320,
-                y: 380,
+              {  //昵称
+                x: 250,
+                y: 120,
                 width: 200,
                 baseLine: 'middle',
                 text: `${user.nickname}`,
                 textAlign:'center',
                 fontSize: 32,
-                color: '#ffffff',
-              },
-              {
-                x: 130,
-                y: 450,
-                baseLine: 'middle',
-                text: `总排名:`,
-                textAlign:'center',
-                fontSize: 28,
-                color: '#ffffff',
-              },
-              {
-                x: 190,
-                y: 450,
-                baseLine: 'middle',
-                text: `${user.allpai}名`,
-                fontSize: 30,
-                color: '#ffd924',
-              },
-              {
-                x: 460,
-                y: 450,
-                baseLine: 'middle',
-                text: `好友排名:`,
-                textAlign: 'center',
-                fontSize: 28,
-                color: '#ffffff',
-              },
-              {
-                x: 530,
-                y: 450,
-                baseLine: 'middle',
-                text: `${user.haoyoupai}名`,
-                fontSize: 30,
-                color: '#ffd924',
-              },
-              {
-                x: 228,
-                y: 745,
-                baseLine: 'middle',
-                text: `${user.cos}ml`,
-                fontSize:100,
-                color: '#ffd924',
-                textAlign: 'center',
-                fontWeight:'bold'
-              },
-              {
-                x: 170,
-                y: 630,
-                baseLine: 'middle',
-                text: `获得汽油`,
-                fontSize: 45,
-                color: '#fff',
-                textAlign: 'center',
-              },
-              {
-                x: 280,
-                y: 200,
-                fontSize: 26,
-                color: '#a90410',
-                text: `${this.data.lvtext[user.level - 1]}LV${user.lvy}`,
-                zIndex:10
+                color: '#333',
               },
             ],
             images: [
-              {
-                width: 662,
-                height: 1003,
+              {  //底图
+                width: 750,
+                height: 1127,
                 x: 0,
                 y: 0,
-                url: `${baseUrl}/MiniProgram/images/poster/window3.png`,
+                url: `${baseUrl}/MiniProgram/images/postem.jpg`,
+                // url: pos,
               },
-              {
+              {  //头像
                 width: 150,
                 height: 150,
-                x: 250,
-                y: 200,
+                x: 45,
+                y: 50,
                 borderRadius:150,
                 borderColor:'#fff',
                 borderWidth:4,
                 url: `${user.pic}`,
               },
-              {
-                width: 80 * 1.4,
-                height: 43 * 1.4,
-                x: 275,
-                y: 160,
-                url: `${baseUrl}/MiniProgram/images/poslv.png`,
+              {   //小程序二维码 
+                width: 120,
+                height: 120,
+                x: 560,
+                y: 950,
+                // url: `${data.data.url}`,
+                url: `${user.pic}`,
               },
-              // {   //小程序二维码 测试测试
-              //   width: 120,
-              //   height: 120,
-                // x: 180,
-                // y: 845,
-              //   url: `${data.data.url}`,
-              // },
-    
             ]
-    
           }
     
           this.setData({ posterConfig: posterConfig }, () => {
@@ -210,19 +320,45 @@ Page({
    
   },
 
-  
-
   goAnswer() {   //继续答题
     millionAnswer.createEffect('click')
 
-    millionAnswer.reportEvent(3,'xb00000100050010',{
-      desc:`用过进入第${millionAnswer.globalData.userData.reached}关`,
-      name:millionAnswer.globalData.userData.reached
-    })
+    if(this.data.userData.status == 3){
+      wx.showToast({
+        title:'你已答完全部题目'
+      })
+    }else{
+      millionAnswer.reportEvent(3,'xb00000100050010',{
+        desc:`用过进入第${millionAnswer.globalData.userData.reached}关`,
+        name:millionAnswer.globalData.userData.reached
+      })
+  
+      wx.redirectTo({
+        url: '../questions/index',
+      })
+    }
 
-    wx.redirectTo({
-      url: '../questions/index',
-    })
+    // apiGetUser().then(res => {
+    //   if(res.data.status == 3){
+    //     // this.setData({
+    //     //   isContinue:false
+    //     // })
+
+    //     wx.showToast({
+    //       title:'你已答完全部题目'
+    //     })
+    //   }else{
+    //     millionAnswer.reportEvent(3,'xb00000100050010',{
+    //       desc:`用过进入第${millionAnswer.globalData.userData.reached}关`,
+    //       name:millionAnswer.globalData.userData.reached
+    //     })
+    
+    //     wx.redirectTo({
+    //       url: '../questions/index',
+    //     })
+    //   }
+    // })
+
   },
 
   registerVip(e){  //注册会员 立即领取优惠券
@@ -291,6 +427,11 @@ Page({
          
         })
   },
+  closeGift(){  //关闭券弹窗
+    this.setData({
+      hasGift:false
+    })
+  },
 
 
   /**
@@ -302,9 +443,9 @@ Page({
       title: '海报生成中',
     })
 
-    this.checContinue()
-
-    millionAnswer.refreshUserdata()  //更新用户信息
+    this.setData({
+      config:millionAnswer.globalData.config
+    })
 
     millionAnswer.reportEvent(1,'xb00000100100010',{
       page_id:'component/success/index',
@@ -326,117 +467,48 @@ Page({
     } 
 
     //测试 开始
+    // let pos =  `${baseUrl}/MiniProgram/images/postem.jpg`
     // let posterConfig = {
-    //   width: 662,
-    //   height: 1003,
+    //   width: 750,
+    //   height: 1127,
     //   debug: false,
     //   pixelRatio: 2,
-    //   blocks: [
-
-    //   ],
+    
     //   texts: [
-    //     {
-    //       x: 320,
-    //       y: 380,
+    //     {  //昵称
+    //       x: 250,
+    //       y: 120,
     //       width: 200,
     //       baseLine: 'middle',
     //       text: `123`,
     //       textAlign:'center',
     //       fontSize: 32,
-    //       color: '#ffffff',
-    //     },
-    //     {
-    //       x: 130,
-    //       y: 450,
-    //       baseLine: 'middle',
-    //       text: `总排名:`,
-    //       textAlign:'center',
-    //       fontSize: 28,
-    //       color: '#ffffff',
-    //     },
-    //     {
-    //       x: 190,
-    //       y: 450,
-    //       baseLine: 'middle',
-    //       text: `1名`,
-    //       fontSize: 30,
-    //       color: '#ffd924',
-    //     },
-    //     {
-    //       x: 460,
-    //       y: 450,
-    //       baseLine: 'middle',
-    //       text: `好友排名:`,
-    //       textAlign: 'center',
-    //       fontSize: 28,
-    //       color: '#ffffff',
-    //     },
-    //     {
-    //       x: 530,
-    //       y: 450,
-    //       baseLine: 'middle',
-    //       text: `1名`,
-    //       fontSize: 30,
-    //       color: '#ffd924',
-    //     },
-    //     {
-    //       x: 228,
-    //       y: 745,
-    //       baseLine: 'middle',
-    //       text: `100ml`,
-    //       fontSize: 100,
-    //       color: '#ffd924',
-    //       textAlign: 'center',
-    //       fontWeight:'bold'
-    //     },
-    //     {
-    //       x: 170,
-    //       y: 630,
-    //       baseLine: 'middle',
-    //       text: `获得汽油`,
-    //       fontSize: 45,
-    //       color: '#fff',
-    //       textAlign: 'center',
-    //     },
-    //     {
-    //       x: 280,
-    //       y: 200,
-    //       fontSize: 26,
-    //       color: '#a90410',
-    //       text: `青铜LV1`,
-    //       zIndex:10
+    //       color: '#333',
     //     },
     //   ],
     //   images: [
-    //     {
-    //       width: 662,
-    //       height: 1003,
+    //     {  //底图
+    //       width: 750,
+    //       height: 1127,
     //       x: 0,
     //       y: 0,
-    //       url: `${baseUrl}/MiniProgram/images/poster/window3.png`,
+    //       url: pos,
     //     },
-    //     {
+    //     {  //头像
     //       width: 150,
     //       height: 150,
-    //       x: 250,
-    //       y: 200,
+    //       x: 45,
+    //       y: 50,
     //       borderRadius:150,
     //       borderColor:'#fff',
     //       borderWidth:4,
-    //       url: `${baseUrl}/MiniProgram/images/poster/widow2.png`,
-    //     },
-    //     {
-    //       width: 80 * 1.4,
-    //       height: 43 * 1.4,
-    //       x: 275,
-    //       y: 160,
-    //       url: `${baseUrl}/MiniProgram/images/poslv.png`,
+    //       url: `${baseUrl}/MiniProgram/images/poster/window.png`,
     //     },
     //     {   //小程序二维码 测试测试
     //       width: 120,
     //       height: 120,
-    //       x: 180,
-    //       y: 845,
+    //       x: 560,
+    //       y: 950,
     //       url: `${baseUrl}/MiniProgram/images/poslv.png`,
     //     },
     //     // {   //小程序二维码 测试测试
@@ -480,10 +552,10 @@ Page({
       page_id:'component/success/index',
       desc:'每次闯关成功页页面离开'
     })
-    let pages = getCurrentPages(); 
-    let l = pages.length; 
-    let prev = pages[l - 2];
-    prev.onLoad()
+    // let pages = getCurrentPages(); 
+    // let l = pages.length; 
+    // let prev = pages[l - 2];
+    // prev.onLoad()
   },
   onHide(){
     millionAnswer.globalData.bgm.pause()  //暂停背景音乐

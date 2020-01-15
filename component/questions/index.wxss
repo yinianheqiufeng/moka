@@ -1,4 +1,5 @@
 /**index.wxss**/
+@import "../../common/common.wxss";
 
 .container {
   position: relative;
@@ -148,7 +149,8 @@
   height: 72rpx;
   position: absolute;
   right: 0;
-  bottom: 12%;
+  bottom: 13%;
+  z-index: 10;
 }
 
 .alive text {
@@ -173,7 +175,7 @@
   bottom: 0;
   left: 0;
   overflow: hidden;
-  height: 14vh;
+  /* height: 22vw; */
   width: 100%;
 }
 
@@ -314,11 +316,16 @@
 .continue image,
 .xz image{width: 100%;height: 100%;}
 
+.reward-bg{position: absolute;width:750rpx;height:632rpx;left: calc(50% - 375rpx);top:25%;}
+.tikect{position: absolute;width:271rpx;height:127rpx;left: calc(50% - 135.5rpx);top: 40%;}
+.nowget{position: absolute;width:331rpx;height: 81rpx;left: calc(50% - 165.5rpx);bottom: 11%}
+.reward-bg .close-help{right:15%;}
+
 @media screen and (min-height: 684px) {
  .sbox{
    margin-top: 80rpx;
  }
  .alive{
-   bottom: 15%;
+   bottom: 12%;
  }
 }

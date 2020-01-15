@@ -1,5 +1,6 @@
 /* component/myprize/index.wxss */
 /**index.wxss**/
+@import "../../common/common.wxss";
 
 .myprize{
   width: 750rpx; 

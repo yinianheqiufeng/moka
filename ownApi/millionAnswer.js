@@ -6,13 +6,13 @@ import {
 /**
  * 模拟引入的接口
  */
-// import { getOpenId ,getUserInfo, memberLoginV2, giveCoupon, createQRCode, getPhoneNumber} from './test.js'
+import { getOpenId ,getUserInfo, memberLoginV2, giveCoupon, createQRCode, getPhoneNumber} from './test.js'
 
 /**
  * 正式要引入的接口
  */
-import { getOpenId, getUserInfo ,memberLoginV2 , createQRCode ,giveCoupon,getPhoneNumber} from 'xxx/api/answer.api.js'
-const reportSDK = require('xxx/utils/reportSDK')
+// import { getOpenId, getUserInfo ,memberLoginV2 , createQRCode ,giveCoupon,getPhoneNumber} from 'xxx/api/answer.api.js'
+// const reportSDK = require('xxx/utils/reportSDK')
 
 
 class MillionAnswer {
@@ -146,16 +146,16 @@ class MillionAnswer {
     }
 
     reportEvent(num, eventId, params = {}) { //埋点事件 num = 1 进入页面上报，num = 2 离开页面上报 , num = 3 , 点击上报
-        if(num == 1){ 
-          params.event_type = 1
-          reportSDK.reportIntoPage(eventId,params)
-        }else if(num == 2){
-          params.event_type = 1
-          reportSDK.reportLeavePage(eventId,params)
-        }else if(num == 3){
-          params.event_type = 2
-          reportSDK.reportSendEvent(eventId,params)
-        }
+        // if(num == 1){ 
+        //   params.event_type = 1
+        //   reportSDK.reportIntoPage(eventId,params)
+        // }else if(num == 2){
+        //   params.event_type = 1
+        //   reportSDK.reportLeavePage(eventId,params)
+        // }else if(num == 3){
+        //   params.event_type = 2
+        //   reportSDK.reportSendEvent(eventId,params)
+        // }
     }
 
     getConfig() { //获取全部配置
@@ -179,6 +179,23 @@ class MillionAnswer {
                 fail_share_img
             }
         })
+    }
+
+    setConfig(res){  //设置配置
+        this.globalData.config = res.data
+
+        let {
+            home_share_txt,
+            fail_share_txt,
+            home_share_img,
+            fail_share_img
+        } = res.data
+        this.globalData.share = {
+            home_share_txt,
+            fail_share_txt,
+            home_share_img,
+            fail_share_img
+        }
     }
 
     becomeVip(params = {}) { //成为会员

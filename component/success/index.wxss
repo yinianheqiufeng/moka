@@ -1,6 +1,8 @@
 /* component/suceess/index.wxss */
 /* component/myprize/index.wxss */
 
+@import "../../common/common.wxss";
+
 /**index.wxss**/
 .poster-box{
   width:100%;
@@ -30,6 +32,15 @@
 .reward-bg{position: absolute;width:750rpx;height:632rpx;left: calc(50% - 375rpx);top:25%;}
 .tikect{position: absolute;width:271rpx;height:127rpx;left: calc(50% - 135.5rpx);top: 40%;}
 .nowget{position: absolute;width:331rpx;height: 81rpx;left: calc(50% - 165.5rpx);bottom: 11%}
+.reward-bg .close-help{
+  position:absolute;
+  top:-60rpx;
+  right:0;
+  width: 60rpx;
+  height: 60rpx;
+  display: block;
+}
+.reward-bg .close-help{right:15%;}
 
 @media screen and (min-height: 684px) {
   .btns{

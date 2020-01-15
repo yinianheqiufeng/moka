@@ -3,7 +3,6 @@ import millionAnswer from '../../ownApi/millionAnswer'
 
 let timer;
 let cjChange = 0; //抽奖过程KEY
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
 
 import { apiGetprize, apiChoujiang, apiAddAddress , apiShenqing,apiGetConfig} from '../../ownApi/index.js'

@@ -2,7 +2,6 @@
 import millionAnswer from '../../ownApi/millionAnswer'
 //index.js
 //获取应用实例
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
 
 import { apiGetGift, apiGetConfig, apiShenqing,apiGetUser} from '../../ownApi/index.js'

@@ -1,7 +1,6 @@
 //index.js 
 //获取应用实例 
 import millionAnswer from '../../ownApi/millionAnswer'
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
  
 import { apiGetSubject, apiGetConfig, apiSubSubject, apiFuhuo, apiGetUser ,apiShenqing} from '../../ownApi/index'
@@ -30,6 +29,7 @@ Page({
     waitTimer:null,  //等地助力计时器
     fail:false,
     userData:{},
+    userData2:{},
     configName: ['lv1_num' , 'lv2_num' ,'lv3_num','lv4_num','lv5_num','lv6_num','lv7_num','lv1_gasoline','lv2_gasoline','lv3_gasoline','lv4_gasoline','lv5_gasoline','lv6_gasoline','lv7_gasoline'],   //配置名
     total:0, //当前等级的总题数
     isFrist:true,  //第一次进
@@ -44,7 +44,9 @@ Page({
       "name": ""
     },
     lvtext:['黑铁','青铜','白银','黄金','钻石','星耀','王者'],
-    showSuccess:false
+    showSuccess:false,
+    hasGift:false,
+    gift:{},
   },
 
 /*获取配置 
@@ -160,6 +162,10 @@ haoyou 抽奖耗油量 */
         this.setData({
           ad:res.data.ad
         })
+      }else {
+        this.setData({
+          ad:null
+        })
       }
      
     })
@@ -204,6 +210,10 @@ haoyou 抽奖耗油量 */
               this.setData({
                 ad:res.data.ad
               })
+            }else {
+              this.setData({
+                ad:null
+              })
             }
 
               
@@ -212,40 +222,53 @@ haoyou 抽奖耗油量 */
           // millionAnswer.createEffect('right')
           millionAnswer.createEffect('success')
 
-          this.setData({
-            answer,
-            showSuccess:true,
-            timeout:true,
-            userData:res.data
-          })   //按钮答对状态
-
           millionAnswer.reportEvent(3,'xb00000100060010',{
             desc:`用过通过第${millionAnswer.globalData.userData.reached}关`,
             name:millionAnswer.globalData.userData.reached
           })
 
-          
+          if(res.data.gift && res.data.gift.id != ''){  //有额外券
+            if(res.data.dat == 1){  //有券且升级的情况
+              let gift = {}
+              gift.gift_id = res.data.gift.id
+              gift.img = res.data.gift.img
+              gift.is_vip = res.data.gift.is_vip
+              gift.key = key
+              gift.answer = answer
+              let str = JSON.stringify(gift)
+              wx.redirectTo({
+                url: '../success/index?gift='+str,
+              })
+            }else{      //有券没升级只是过关的情况
+              this.setData({
+                answer,
+                hasGift:true,
+                timeout:true,
+                userData2:res.data,
+                gift:res.data.gift
+              })  
+            }
+            
+          }else{
 
-          // if(res.data.gift && res.data.gift.id != ''){
-          //   let gift = {}
-          //   gift.gift_id = res.data.gift.id
-          //   gift.img = res.data.gift.img
-          //   gift.is_vip = res.data.gift.is_vip
-          //   gift.key = key
-          //   gift.answer = answer
-          //   let str = JSON.stringify(gift)
-          //   wx.redirectTo({
-          //     url: '../success/index?gift='+str,
-          //   })
-          // }else{
-          //   let gift = {}
-          //   gift.key = key
-          //   gift.answer = answer
-          //   let str = JSON.stringify(gift)
-          //   wx.redirectTo({
-          //     url: '../success/index?gift='+str,
-          //   })
-          // }
+            if(res.data.dat == 1){  //没券升级的情况
+              let gift = {}
+              gift.key = key
+              gift.answer = answer
+              let str = JSON.stringify(gift)
+              wx.redirectTo({
+                url: '../success/index?gift='+str,
+              })
+            }else{   //没券没升级只是过关的情况
+              this.setData({
+                answer,
+                showSuccess:true,
+                timeout:true,
+                userData2:res.data,
+                gift:res.data.gift
+              })  
+            }
+          }
          
         } else if(res.error == '3') {   //答错
           millionAnswer.createEffect('shibai')
@@ -470,13 +493,87 @@ haoyou 抽奖耗油量 */
     this.setData({
       showSuccess:false,
       count:15,
-      timeout:false
+      timeout:false,
+      userData:this.data.userData2
     })
     this.countDown()
 
     this.getSubject()
     this.getUser()
 
+  },
+  registerVip(e){  //注册会员 立即领取优惠券
+    millionAnswer.createEffect('click')
+
+    if(e.detail.iv){  //同意授权
+
+      let { iv, encryptedData } = e.detail
+
+      if(this.data.userData.is_vip == 1){  //是否是会员 ，1 是 ,2 不是
+        this.lingqu()  //券领取记录
+
+      }else{
+
+        millionAnswer.getPhone({ iv, encryptedData })
+        .then(result => {
+          let openId = this.data.userData.openid
+          let phone = result.data.phoneNumber
+          let params = { iv, encryptedData , openId,phone}
+          millionAnswer.becomeVip(params)
+          .then(res => {
+            millionAnswer.refreshUserdata()
+    
+            let params = {}
+            params.user_id = res.userId
+            params.phone = res.phone ? res.phone : ''
+    
+            apiShenqing(params)   //申请会员后请求记录
+            wx.switchTab({
+              url: '/pages/index/index?channel=300485',
+            })
+
+            // this.lingqu()  //券领取记录
+    
+          })
+        })
+        
+       
+      }
+
+    }else{  //拒绝授权
+      this.setData({
+        hasGift:false,
+        showSuccess:true
+      })
+    }
+    
+  },
+  lingqu(){ //券领取记录
+    apiGetExchange({gift_id:this.data.gift.id})   
+        .then(res => {
+          if(res.error < 0){
+            wx.showToast({
+              title: '领取成功',
+            })
+          }else{
+            wx.showToast({
+              title: res.info,
+              icon:'none'
+            })
+          }
+
+          this.setData({
+            hasGift:false,
+            showSuccess:true
+          })
+         
+        })
+  },
+  closeGift(){  //关闭券弹窗
+    this.setData({
+      hasGift:false,
+      showSuccess:true
+    })
   },
 
   //事件处理函数
@@ -607,7 +704,6 @@ haoyou 抽奖耗油量 */
           imageUrl: millionAnswer.globalData.share.fail_share_img,   //分享图
         }
       }
-      
       
     }else{
       return {

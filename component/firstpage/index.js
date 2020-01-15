@@ -3,15 +3,14 @@
 
 import millionAnswer from '../../ownApi/millionAnswer'
 
-const app = getApp()
 const baseUrl = millionAnswer.globalData.baseUrl
 
 import { apiGetUser , apiMarkUser , apiShenqing , apiGetConfig} from '../../ownApi/index.js'
 
 
-import { getOpenId , getUserInfo} from 'xxx/api/answer.api.js'
+// import { getOpenId , getUserInfo} from 'xxx/api/answer.api.js'
 
-// import { getUserInfo, memberLoginV2, giveCoupon, createQRCode, getOpenId} from '../../ownApi/test.js'
+import { getUserInfo, memberLoginV2, giveCoupon, createQRCode, getOpenId} from '../../ownApi/test.js'
 
 
 import '../animation/anime.min.js'
@@ -114,20 +113,20 @@ Page({
         wx.hideLoading()
     })
   },
-  getOpenId2(){
+  getOpenId2(pid){
     getOpenId().then(res2 => {
       getUserInfo({ openId: res2.data.openId})
       .then(res3 => {
         let data = res3.data
         let params = {}
 
-        params.openid = res2.data.openId
-        params.nickName = data.nickName
-        params.avatarUrl = data.avatarUrl
-        params.memberFlag = data.memberFlag
-        params.userId = data.memberFlag ? data.userId : null
-        params.pid = pid
-        this.markUser(params)
+        // params.openid = res2.data.openId
+        // params.nickName = data.nickName
+        // params.avatarUrl = data.avatarUrl
+        // params.memberFlag = data.memberFlag
+        // params.userId = data.memberFlag ? data.userId : null
+        // params.pid = pid
+        // this.markUser(params)
 
         if(pid > 0){
           this.setData({
@@ -135,15 +134,15 @@ Page({
           })
         }
 
-        // var i = Math.random() * (999999 - 100000) + 100000;   //测试测试
-        // var j = parseInt(i, 10); 
-        // params.openid = 'dfsggrkljfsysrjkldf' + j
-        // params.nickName = '测试' + j 
-        // params.avatarUrl = 'https://ca.hj388.cn/yc/MiniProgram/images/page1/touxiang.jpg'
-        // params.memberFlag = true
-        // params.userId = 67
-        // params.pid = pid
-        // this.markUser(params)
+        var i = Math.random() * (999999 - 100000) + 100000;   //测试测试
+        var j = parseInt(i, 10); 
+        params.openid = 'dfsggrkljfsysrjkldf' + j
+        params.nickName = '测试' + j 
+        params.avatarUrl = 'https://ca.hj388.cn/yc/MiniProgram/images/page1/touxiang.jpg'
+        params.memberFlag = true
+        params.userId = 67
+        params.pid = pid
+        this.markUser(params)
       })
     })
   },
@@ -152,7 +151,7 @@ Page({
     apiGetUser({pid}).then(res => {
 
       if(res.error == 606  ){   //没有用户缓存  测试
-        this.getOpenId2()
+        this.getOpenId2(pid)
       
       }else{
         let you = parseInt(res.data.quantity)
@@ -183,7 +182,7 @@ Page({
         }
 
         if(res.error == 606){
-          this.getOpenId2()
+          this.getOpenId2(pid)
         }else{
           let data = res.data
           let params = {}

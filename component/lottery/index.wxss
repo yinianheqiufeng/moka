@@ -1,4 +1,6 @@
 /**index.wxss**/
+@import "../../common/common.wxss";
+
 .lottery{
   width: 100vw;height: 100vh;position: relative;overflow: hidden;background: url(https://ca.hj388.cn/yc/MiniProgram/images/p1.png) no-repeat 0 0 / 100% 100%;
   }

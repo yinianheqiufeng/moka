@@ -15,7 +15,7 @@
 
                             <text class='level'>{{lvtext[userData.level - 1]}}Lv.{{userData.lvy}}</text>
                             <view class='question'>第<text class='question-num'>{{subject.key + 1}}</text>题</view>
-                            <text class='question-total'>共<text class='total-number'>{{total}}</text>题</text>
+                            <text class='question-total'>共<text class='total-number'>{{subject.count}}</text>题</text>
                       </image>
                       <text class='question-title'>{{subject.title}}</text>
                   </view>
@@ -40,7 +40,8 @@
       </button>
 
       <view class='banner' bindtap="clickBanner" hidden="{{!ad}}">
-            <image  mode="scaleToFill" src='{{ad.img}}'></image>
+             <image  mode="widthFix" src='{{ad.img}}'></image>
+         <!--  <image  mode="widthFix" src='https://ca.hj388.cn/yc/wei/upload/xiaochengxu/2020/01/15/15790624025079.jpg'></image>-->
       </view>
 
       <!-- 失败弹窗 hidden='{{!fail}}'-->
@@ -99,7 +100,7 @@
       <view class="mask success" hidden="{{!showSuccess}}">
             <view class="center">
                   <image class="success-k" src="{{baseUrl}}MiniProgram/images/poster/suc-widnow.png" />
-                  <text class="you">{{userData.cos}}ml</text>
+                  <text class="you">{{userData2.cos}}ml</text>
                   <view class="suc-btns">
                         <button class='continue' plain='true' bindtap="continue" >
                               <image src='{{baseUrl}}MiniProgram/images/poster/continue-big.png'></image>
@@ -111,6 +112,19 @@
             <image mode='aspectFit'  bindtap="giveup" class='close-help' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
 
             </view>
+      </view>
+
+       <!-- 通关奖励-->
+      <view class='mask' hidden="{{!hasGift}}">
+           <view class='reward-bg'>
+              <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/tongguan-jiangli.png"></image>
+              <image class='tikect' mode="aspectFit" src="{{gift.img}}"></image>
+              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip">
+                 <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
+              </button>
+
+              <image mode='aspectFit'  bindtap="closeGift" class='close-help' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+           </view>
       </view>
       
 </view>
