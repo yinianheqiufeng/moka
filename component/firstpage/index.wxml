@@ -1,0 +1,55 @@
+<!--index.wxml--> 
+
+<my-component my-property='{{title}}' /> 
+
+<view class="container">
+  <!-- <image class='backgroundimg' mode="scaleToFill" src="{{item.bgimg}}"></image> -->
+  <image class='logo' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/logo.png"></image>
+  <!-- <image class='shouye-chunyun animated pulse infinite' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/page1/img1.png"></image> -->
+  <image class='shouye-chunyun animated pulse infinite' mode="aspectFit" src="{{config.home_theme}}"></image>
+  <view class='twobuttons flex'>  
+  <button class='button1  infinite' bindtap="default" plain='true'>
+        <image class='mybutton' mode="aspectFit" src="{{config.button1}}"></image>
+
+<view class="level">
+  {{lvtext[userData.level - 1]}} LV{{userData.lvy}}
+</view>
+
+        <image class='altarimg' mode="aspectFit" src="{{userData.pic}}"></image>
+        <view class='nickname'>{{userData.nickname}}</view>
+        <view class='dangqianyoulaing'>当前油量：<view class='oilnum'>{{youliangtext}}</view></view>
+    </button>
+    <button class='button2  infinite' bindtap="" plain='true' bindtap="goShop" lang="zh_CN" >
+        <image  mode="aspectFit" src="{{config.button2}}"></image>
+    </button>
+  </view>
+  <button class='button3 animated pulse infinite' plain='true' bindtap="goTest" lang="zh_CN" >
+         <image mode="aspectFit" src="{{config.button3}}"></image>
+  </button>
+
+  <!-- <view class="goshop animated pulse infinite" bindtap="goShop"><image class="jifen" src="{{baseUrl}}MiniProgram/images/page1/jifen.png"></image></view> -->
+
+  <button plain="true"  class="vip animated swing" open-type="getPhoneNumber" bindgetphonenumber="registerVip" hidden="{{isRegister}}"><image  src="{{baseUrl}}/MiniProgram/images/register-vip.png"></image></button> 
+
+  <image mode="aspectFit" src="{{config.firstlogo}}" class="logos" hidden="{{config.model != 1}}"></image>
+
+  <!-- 好友助力弹窗 -->
+  <view class='friendin' hidden="{{!isHelp}}">
+      <view class='friend-window center'>
+             <image  mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/weihaoyouzhuli/window2.png"></image>
+             <button class='begin-answer animated pulse infinite' plain='true' bindtap="help">
+                <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/weihaoyouzhuli/help-btn2.png"></image>
+             </button>
+      </view>
+  </view>
+
+    <!-- 得到复活卡 -->
+      <view class="mask livecard" hidden='{{!showCard}}'>
+        <view class="center">
+            <text>恭喜您获得复活卡 X {{getCardNum}}</text>
+            <image mode='aspectFit' class='card' src='{{baseUrl}}/MiniProgram/images/question/livecard.png'></image>
+            <image mode='aspectFit' bindtap="closeCard" class='close-card' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+        </view>
+      </view>
+</view>
+

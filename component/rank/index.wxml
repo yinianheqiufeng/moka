@@ -1,0 +1,71 @@
+<!--index.wxml--> 
+<my-component my-property='{{title}}' />  
+
+<view class="container">
+      <image class='logo' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/logo.png"></image>
+ 
+       <view class='rank'>
+              <image  mode="widthFix"  src="{{baseUrl}}/MiniProgram/images/rank/rank.png?v=3"></image>
+              <view class="top">
+                <view class='user'>
+                  <image class='altar' src='{{myRank.pic}}'></image>
+                  <text class='nickname'>{{myRank.nickname}}</text>
+                </view>
+                <block wx:if="{{rankType == 1}}">
+                  <view class='position'>排名：<text class='ranknum'>{{myRank.haoyoupai > 999 ? '999+' : myRank.haoyoupai}}</text></view>
+                </block>
+                <block wx:else>
+                  <view class='position'>排名：<text class='ranknum'>{{myRank.allpai}}</text></view>
+                </block>
+                <view class='pass'>通关：<text class='passnum'>{{myRank.reached}}</text> </view>
+                <!-- <view class='oil'>油量：<text class='oilknum'>{{myRank.quantity}}ml</text> </view> -->
+                <view class='oil'>油量：<text class='oilknum'>{{teshuquantity}}</text> </view>
+              </view>
+              
+
+              
+              <button class='friendrank rankfont {{rankType == 1 ? "on" : ""}}' plain='true' lang="zh_CN" bindtap="switchRank" data-type="1">
+                    <view>好友排名</view>
+              </button>
+              <button class='wholerank rankfont {{rankType == 2 ? "on" : ""}}' plain='true' lang="zh_CN" bindtap="switchRank" data-type="2">
+                    <view>全网排名</view>
+              </button>
+              <image class='tabar' mode="aspectFill" src='{{baseUrl}}/MiniProgram/images/rank/bar.png'></image>
+
+                <view class='ranktitle'>
+                  <text class='rankname conmonfont'>排名</text>
+                  <text class='usermessage conmonfont'>用户信息</text>
+                  <text class='passname conmonfont'>通关</text>
+                  <text class='oilname conmonfont'>获得油量</text>
+                </view>
+                  
+
+              <scroll-view class="rank-list" scroll-y="{{true}}">
+                  <view class='rank-user' wx:for="{{rankList}}" wx:key="index" >
+                      <view class='rank-number'>{{index + 1}}</view>
+                      <view class='user-messall'>
+                          <image class='user-altar' src='{{item.pic}}'></image>
+                          <text>{{item.nickname}}</text>
+                      </view>
+                      <view class='pass-number'>{{item.reached}}关</view>
+                      <view class='oil-number'>{{item.ytext}}</view>
+                </view>              
+              </scroll-view>
+
+              
+                  
+                    
+
+
+
+             
+
+       </view>
+
+
+
+      <!-- <button class='action' plain='true' bindtap='bindViewTap'>
+            <image src='{{baseUrl}}/MiniProgram/images/challenge/start.png'></image>
+      </button> -->
+    
+</view>

@@ -1,0 +1,70 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.9.4",
+	"appid": "wx6e9a03644210e511",
+	"projectname": "MiniProgram",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "/component/firstpage/index",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "component/firstpage/index",
+					"pathName": "component/firstpage/index",
+					"query": "id=172",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "component/firstpage/index",
+					"pathName": "component/firstpage/index",
+					"query": "id=165",
+					"scene": null
+				}
+			]
+		}
+	}
+}

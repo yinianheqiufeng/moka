@@ -1,0 +1,24 @@
+{
+  "pages": [
+    "component/firstpage/index",  
+    "component/shop/index",
+
+    "component/questions/index",
+    "component/myprize/index",
+    "component/lottery/index", 
+    "component/challenge/index",
+    "component/rank/index",
+    "component/success/index",
+    
+    "component/h5/index"        
+  ],
+  
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "瓜分百万汽油",
+    "navigationBarTextStyle": "black",
+    "navigationStyle":"custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

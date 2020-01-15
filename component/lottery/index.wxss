@@ -1,0 +1,151 @@
+/**index.wxss**/
+.lottery{
+  width: 100vw;height: 100vh;position: relative;overflow: hidden;background: url(https://ca.hj388.cn/yc/MiniProgram/images/p1.png) no-repeat 0 0 / 100% 100%;
+  }
+.luckdraw{position: absolute;width:695rpx;height:249rpx;left: calc(50% - 347.5rpx);top: 24vw;}
+.rule{position:absolute;top: 11%;width:171rpx;height: 53rpx;right: -1%;z-index: 20;}
+.draw-neadoil{position: absolute;width: 578rpx;height: 100rpx;left: calc(50% - 289rpx);top: 58vw;}
+.draw-notice{position: absolute;width: 500rpx;left: calc(50% - 250rpx);top: 28%;display: flex;align-items: center;justify-content: center;
+font-style: 15px;font-weight: bold;color: #fff;text-align: center;}
+.box-kuang{
+   width: 607rpx;height: 630rpx;
+   position: absolute;top: 72vw;
+   left: calc(50% - 303.5rpx);
+   background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/choujiangkuang.png?v=5) no-repeat 0 0 / 100% 100%;
+}
+.white,.orange{position: absolute;width: 584rpx;height: 585rpx;left: calc(50% - 292rpx);top: 2.5%;
+/* animation: shandong 0.8s infinite ease-in-out; */
+}
+.white{animation-delay: 0.3s;}
+.orange{animation-delay: 0.6s;}
+/* @keyframes shandong{
+0%{opacity: 0.1;}
+100%{opacity: 1;}
+} */
+.box{
+   width: 532rpx;height: 528rpx;
+  position: absolute;top: 7%;left: calc(50% - 266rpx);
+     /* width: 607rpx;height: 630rpx;
+   position: absolute;top: 33.5%;
+   left: calc(50% - 303.5rpx);
+   background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/choujiangkuang.png?v=5) no-repeat 0 0 / 100% 100%; */
+}
+
+.list{ 
+ width: 180rpx; height: 180rpx; 
+ position: absolute; 
+	display: flex; flex-direction: column;
+   flex-wrap: wrap; justify-content: center; align-content: center; align-items: center;
+}
+/* 抽奖过程中选定样式 */
+.list.change_in{ 
+  background-color: #ff7245;
+  border-radius: 10px;
+  z-index: 20;
+/* border: 1px solid #b12731; */
+}
+.list_t{ width: 161rpx; height: 161rpx;}
+.list_t image{ width: 100%; height: 100%;}
+/* 根据TOP */
+.list:nth-child(1){ left: 50%; top: 50%; 
+/*color: #fff;
+  background-color: #1CBBB4; */
+  width: 161rpx; height: 161rpx; 
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/choujiang.png) no-repeat 0 0 / 100% 100%;
+	display: flex; justify-content: center; align-content: center; align-items: center;
+	-webkit-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);
+}
+.lsbtn{position: absolute;width: 161rpx; height: 161rpx; 
+  background: none;left: 50%; top: 50%; 
+	-webkit-transform: translate(-50%,-50%);
+			transform: translate(-50%,-50%);}
+/* .list.grey:nth-child(1){ background-color: #5F9EA0;} */
+.list:nth-child(2) , .list:nth-child(3) , .list:nth-child(4){ top: 0;}
+.list:nth-child(6) , .list:nth-child(7) , .list:nth-child(8){ bottom: 0;}
+.list:nth-child(5) , .list:nth-child(9){ top: 50%;
+	-webkit-transform: translateY(-50%);
+			transform: translateY(-50%);
+}
+/* 根据LEFT */
+.list:nth-child(2) , .list:nth-child(8) , .list:nth-child(9){ left: 0;}
+.list:nth-child(3) , .list:nth-child(7){ left: 50%;
+	-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+}
+.list:nth-child(4) , .list:nth-child(5) , .list:nth-child(6){ right: 0;}
+
+
+.myaward{position: absolute;width:280rpx;height: 100rpx;bottom: 3%;left: 10%;}
+.winoil{position: absolute;width:280rpx;height: 100rpx;bottom: 3%;right: 10%;}
+
+.center{
+  width: 700rpx;
+}
+ .kuang{
+   width: 100%;
+   height: 900rpx;
+ }
+ .rule-wrap{
+   width: 554rpx;
+   height: 560rpx;
+   position: absolute;
+   top: 14%;
+   left: calc(50% - 277rpx);
+
+ }
+ .rule-img{
+   width: 100%;
+ }
+.close{
+  width: 65rpx;
+  height:65rpx;
+  position: absolute;
+  right: 10%;
+  top: -5%;
+  z-index: 10
+}
+
+/*规则*/
+.choujiangcenter{position: absolute; width:616rpx;height: 717rpx;left: calc(50% - 313rpx);top: 20%;}
+ 
+
+
+/* 中奖的弹窗 */
+.draw-window{display: none;}
+.draw-box{position: absolute;width: 750rpx;height:775rpx;top: 20%;left: calc(50% - 375rpx);}
+.draw-close{width: 65rpx;height:65rpx;position: absolute;right: 25%;top: 8%;z-index: 10}
+.getdown{position: absolute;width:283rpx;height: 69rpx;left: calc(50% - 141.5rpx);bottom: 27%;}
+.getaward{position: absolute;width: 280rpx;height: 100rpx;left: calc(50% - 140rpx);
+font-size: 20px;font-weight: bold;text-align: center;color: #d03d38;-webkit-text-stroke: 0.5px #fff;
+top: 40%;}
+/* .getaward text{font-size: 16px;text-align: center;} */
+.close-message{ width: 65rpx;height:65rpx;position: absolute;right: 15%;top: -30%;z-index: 10;}
+.inputcenter{
+  width: 582rpx;height: 1021rpx;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/message-window.png?v=2) no-repeat 0 0 / 100% 100%;
+}
+.getshiwu{position: absolute;width: 360rpx;left: calc(50% - 180rpx);
+font-size: 16px;font-weight: bold;text-align: center;color: #d03d38;-webkit-text-stroke: 0.5px #fff;
+top: 36%;}
+.messages{width: 100%;position: absolute;bottom: 7%;}
+.messages input{
+   width: 405rpx;height: 66rpx;
+   background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/input-bg.png) no-repeat 0 0 / 100% 100%;
+  color: #ffd924;font-size: 13px;margin: 20rpx auto;text-align: center;
+  }
+  .submit{width:283rpx;height: 69rpx;margin: 0 auto;}
+
+/* 未中奖 */
+.weizhongjiang{width:479rpx;height:511rpx;}
+.zaichouyici{position: absolute;width:331rpx;height:81rpx;left: calc(50% - 165.5rpx);bottom: 10%;}
+.nodraw-close{position: absolute;width:65rpx;height: 65rpx;top: -15%;right: -10%;}
+
+@media screen and (min-height: 684px) {
+  .luckdraw{top: 30vw;}
+  .draw-neadoil{top: 67vw;}
+  .box-kuang{top: 85vw;}
+  .myaward{bottom: 20vw;}
+.winoil{bottom: 20vw;}
+
+}

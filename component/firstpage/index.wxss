@@ -1,0 +1,85 @@
+ /**index.wxss**/
+.container {
+  position: relative;
+  width: 100%; 
+  height: 100vh;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/p1.png) no-repeat 0 0 / 100% 100%;
+}
+.shouye-chunyun{position:absolute;width:630rpx;height: 468rpx;top: 20vh;left: calc(50% - 315rpx);}
+@media screen and (min-height: 684px) {
+  .shouye-chunyun{
+    top: 24vh;
+  }
+}
+.twobuttons{width: 693rpx;height: 113rpx;justify-content: space-between;position: absolute;bottom: 22%;left: calc(50% - 346.5rpx);
+}
+.button1,.button2{padding: 0;border: 0!important;z-index: 20;overflow: visible;}
+.button1{width: 347rpx;height: 113rpx;}
+.button2{width: 342rpx;height: 113rpx;}
+.nickname{color: #aa1320;font-size: 14px;position: absolute;top: -4%;width: 110px;
+left: 28%;
+font-weight: bold;
+  letter-spacing: 1rpx;
+overflow: hidden;
+margin-bottom: 5px;
+text-align: center;white-space: nowrap;text-overflow: ellipsis;}
+.lvimg{position: absolute;width: 68rpx;height: 28rpx;top: -18%;left: 45%;z-index: 20;}
+.level{
+  position: absolute;
+  top: -46%;
+  width: 150rpx;
+  background: #aa1320;
+  color: #fff;
+  font-size: 12px;
+  left: 31%;
+  /* line-height: 2; */
+  border-radius: 10rpx;
+}
+.altarimg{position: absolute;width: 60rpx;height: 60rpx;border-radius: 50%;top: 12%;left: 4%;
+border: 2px solid #b12731;}
+.dangqianyoulaing{display: flex;align-items: center;position: absolute;bottom: 12%;
+font-size: 14px;left: 28%;color: #fff;font-weight: bold;
+color: #aa1320;
+letter-spacing: 0rpx;
+}
+.button3{width: 693rpx;height: 125rpx; position: absolute;left: calc(50% - 346.5rpx);bottom: 10%;border: 0!important;}
+.button3 image{height: 100%;width: 100%;}
+
+.goshop{position: absolute;bottom: 5%;width: 141rpx;height:43rpx;left: calc(50% - 70rpx);}
+.goshop image{width: 100%;height: 100%;}
+
+.friendin{position: fixed;top: 0;left: 0;width: 100%;height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);z-index: 200;
+  }
+  .friend-window{width:calc(520rpx *1.2);height:calc( 670rpx * 1.2);top: 45%;}
+  .begin-answer{position: absolute;width:424rpx;height:85rpx;left: calc(50% - 212rpx);bottom: 8%;}
+
+  .vip{position: absolute;left: 0;top: 53%;width: 127rpx;height: 123rpx;transform-origin: 0 100%;animation-iteration-count: 3;border: 0!important;}
+
+  .livecard text{
+    text-align: center;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff570;
+    margin: 0 0 10px;
+  }
+  .card{
+    width: 440rpx;
+    height: 664rpx;
+  }
+  
+  .close-card{
+    width: 60rpx;
+    height: 60rpx;
+    display: block;
+    margin: 20px auto;
+  }
+
+  .logos{
+    position: absolute;
+    bottom: 3%;
+    width: calc(410rpx * 1.2);
+    height:calc(32rpx * 1.2);
+    left:calc(50% - 205rpx * 1.2);
+  }

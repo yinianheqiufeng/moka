@@ -1,0 +1,153 @@
+/* component/myprize/index.wxss */
+/**index.wxss**/
+
+.myprize{
+  width: 750rpx; 
+  top:53%;
+}
+.myprize-img{
+  width: 100%;
+  height: 996rpx;
+}
+.tabbar{
+  position: absolute;
+  top: 21.3%;
+  left: 9%;
+  width: 82%;
+  justify-content: space-between;
+}
+.tabbar view{
+  width: 33.33%;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  font-weight: bold;
+  background: url(https://ca.hj388.cn/yc//MiniProgram/images/award/my-orage.png) no-repeat 0 0 / 100% 100%;
+}
+.tabbar view.on{
+  -webkit-text-stroke: .8px orange;
+  background-image: url(https://ca.hj388.cn/yc//MiniProgram/images/award/my-yellow.png);
+}
+.hr{
+  position: absolute;
+  top: 32%;
+  width: 83.3%;
+  left: 8%;
+  height: 10rpx;
+}
+.coupon-wrap{
+  position: absolute;
+  bottom: 5vw;
+  width: 600rpx;
+  /* left: 8%;  */
+  /* height: 53%; */
+  height: 85vw;
+  left: calc(50% - 300rpx);
+/* background-color: #ddd; */
+}
+
+.coupon-list{
+  width: 95%;
+  margin: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.coupon-item{
+  width:100%;
+  /* height: 185rpx; 
+  width:49%;
+  */
+  height: 80%;
+  margin-bottom: 16rpx;
+  /* background-color: red; */
+}
+.coupon{
+  width: 100%;
+}
+
+
+/* .type2 .coupon-item{width: 100%;height: 40rpx;text-align: center;}
+.type2 .coupon-item text{font-size: 16px;color:#fff;}
+.type3 .coupon-item{width: 100%;height: 40rpx;text-align: center;}
+.type3 .coupon-item text{font-size: 16px;color:#fff;} */
+
+.coupon-single{
+  width: 100%;
+  background: #fb7e5e;
+  color:#fff;
+  position: relative;
+  min-height: 120rpx;
+}
+.coupon-single .flex{width: 100%;padding: 20rpx 0 ;}
+.money{display: flex;justify-content:center;text-align:center;align-items: center;font-size: 28px;border-right: 1px dashed red;padding-right: 20rpx;}
+.micon{font-size: 14px;margin-right: -10px;}
+.gift-img{width: 80rpx;height: 80rpx;margin-left: 20rpx;}
+.right{width: 50%;text-align: center;padding: 0rpx 0 0 20rpx;position: relative;display: flex;align-items: center;font-size: 16px;}
+.use{position: absolute;width:168rpx;height: 61rpx;right: 10rpx;top: 30rpx;transform: scale(.8);}
+.cbottom{position: relative;border-top:1px dashed #fff ;padding:20rpx;transition: border .3s;}
+.cbottom.on{border-color: transparent;}
+.coupon-content{font-size: 14px;margin-top: -10rpx;display: flex;justify-content: flex-start;transition:height .2s;}
+.coupon-content.on{height: 0;overflow: hidden;}
+.carrow{position: absolute;width:36rpx;height:36rpx;right: 16rpx;top: 6rpx;transition: transform .1s;}
+.carrow.on{transform: rotate(180deg);}
+
+/* 中奖的弹窗 */
+.draw-window{display: none;}
+.draw-box{position: absolute;width: 750rpx;height:775rpx;top: 20%;left: calc(50% - 375rpx);}
+.draw-close{width: 65rpx;height:65rpx;position: absolute;right: 25%;top: 8%;z-index: 10}
+.getdown{position: absolute;width:283rpx;height: 69rpx;left: calc(50% - 141.5rpx);bottom: 27%;}
+.getaward{position: absolute;width: 280rpx;height: 100rpx;left: calc(50% - 140rpx);
+font-size: 20px;font-weight: bold;text-align: center;color: #d03d38;-webkit-text-stroke: 0.5px #fff;
+top: 40%;}
+/* .getaward text{font-size: 16px;text-align: center;} */
+.close-message{ width: 65rpx;height:65rpx;position: absolute;right: 0%;top: 3%;z-index: 10;}
+.inputcenter{
+  width: 582rpx;height: 1021rpx;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/message-window.png?v=2) no-repeat 0 0 / 100% 100%;
+}
+.getshiwu{position: absolute;width: 360rpx;left: calc(50% - 180rpx);
+font-size: 16px;font-weight: bold;text-align: center;color: #d03d38;-webkit-text-stroke: 0.5px #fff;
+top: 36%;}
+.messages{width: 100%;position: absolute;bottom: 7%;}
+.messages input{
+   width: 405rpx;height: 66rpx;
+   background: url(https://ca.hj388.cn/yc/MiniProgram/images/choujiang/input-bg.png) no-repeat 0 0 / 100% 100%;
+  color: #ffd924;font-size: 13px;margin: 20rpx auto;text-align: center;
+  }
+  .submit{width:283rpx;height: 69rpx;margin: 0 auto;}
+
+  .mask-window{
+     width: 526rpx;height: 670rpx;
+     background: url(https://ca.hj388.cn/yc/MiniProgram/images/exchange/duihuan-window.png) no-repeat 0 0 / 100% 100%;
+}
+.duihuan-button{position: absolute;bottom: 3%;width:283rpx;height: 69rpx;left: calc(50% - 141.5rpx);}
+.close{position: absolute;right: -10%;top: -10%;width:65rpx;height: 65rpx;z-index: 20;}
+.scroller{
+  width: 80%;
+  margin: 10% auto 0%;
+  height: 70%;
+}
+
+.mask-window text{
+  display: block;
+  font-size: 14px;
+  color: #fff;
+}
+.mask-window .center{width: 80%;text-align: center;}
+.quan-ma{font-size: 18px;color: #fff;}
+.mask-window .tip{margin-top: 20rpx;font-size: 12px;color: #ddd;}
+.mask-window .title{
+  margin-bottom: 10rpx;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media screen and (min-height: 684px) {
+ .myprize{
+  top:47%;
+} 
+}

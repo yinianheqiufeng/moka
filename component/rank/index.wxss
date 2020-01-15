@@ -1,0 +1,243 @@
+/**index.wxss**/
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/bg.png) no-repeat 0 0 / 100% 100%;
+}
+
+.rank {
+  width: 100%;
+  position: absolute;
+  top: 25vw;
+  left: 0;
+}
+
+.top{
+  display: flex;
+  width: 80%;
+  position: absolute;
+  top: 18.5%;
+  align-items: center;
+  justify-content: space-between;
+  left: 10%;
+}
+
+.user {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  width: 200rpx;
+  top: 19%;
+  left: 10%;
+  margin-right: 10rpx;
+}
+
+.altar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #b12731;
+  margin-right: 10rpx;
+}
+
+.nickname {
+  margin-left: 3rpx;
+  width: 120rpx;
+  font-size: 12px;
+  color: #fff;
+  overflow: hidden;
+  /* text-align: center; */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.position {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  text-align: left;
+  /* width: 120rpx; */
+  height: 40rpx;
+  font-size: 12px;
+  color: #fff;
+  /* top: 19%;
+  left: 32%; */
+}
+
+.pass {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  /* width: 120rpx; */
+  height: 40rpx;
+  font-size: 12px;
+  color: #fff;
+  top: 19%;
+  right: 30%;
+}
+
+.ranknum{
+  width: 40rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.passnum{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.oil {
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #fff;
+  width: 160rpx;
+  height: 40rpx;
+  top: 19%;
+  right: 10%;
+}
+
+
+.rankfont {
+  position: absolute;
+  z-index: 10;
+}
+
+.rankfont view {
+  font-size: 15px;
+  color: #fff;
+}
+
+.friendrank {
+  left: 8%;
+  top: 26%;
+  width: 312rpx;
+  height: 68rpx;
+  z-index: 20;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/rank/orange.png?v=1) no-repeat 0 0 / 100% 100%;
+}
+
+.wholerank {
+  right: 9%;
+  top: 26%;
+  width: 312rpx;
+  height: 70rpx;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/rank/orange.png?v=1) no-repeat 0 0 / 100% 100%;
+}
+
+.friendrank.on,.wholerank.on{
+  background-image: url(https://ca.hj388.cn/yc/MiniProgram/images/rank/red.png);
+}
+
+.tabar {
+  position: absolute;
+  top: 31.6%;
+  width: 626rpx;
+  height: 12rpx;
+  left: calc(50% - 316rpx);
+  z-index: 30;
+}
+
+.ranktitle {
+  position: absolute;
+  top: 34%;
+  width: 620rpx;
+  left: calc(50% - 310rpx);
+  display: flex;
+  align-items: center;
+}
+
+.conmonfont {
+  width: 25%;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
+
+.rank-list{
+ position: absolute;
+  top: 38%;
+  width: 580rpx;
+  height: 58%;
+  left: calc(50% - 290rpx);
+}
+
+.rank-user {
+ 
+ width: 100%;
+  height: 104rpx;
+  margin-bottom: 18rpx;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/rank/rank-bg.png) no-repeat 0 0 / 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.rank-user view {
+  font-size: 12px;
+  color: #fff;
+}
+
+.rank-number {
+  font-size: 12px;
+  color: #fff;
+  width: 86rpx;
+  text-align: center;
+}
+
+.user-altar {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  color: #fff;
+  overflow: hidden;
+  border: 1px solid #333;
+  margin-right: 10rpx;
+}
+
+.user-messall {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  margin-left: 30rpx;
+}
+
+.user-messall text {
+  font-size: 12px;
+  margin-left: 5rpx;
+  width: 60%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pass-number {
+  text-align: center;
+}
+
+.oil-number {
+  width: 30%;
+  text-align: center;
+}
+
+.rule {
+  width: 182rpx;
+  height: 54rpx;
+  position: absolute;
+  left: calc(50% - 91rpx);
+  bottom: 8%;
+}
+
+
+@media screen and (min-height: 684px) {
+  .rank{
+    top: 36vw;
+  }
+}

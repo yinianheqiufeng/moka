@@ -1,0 +1,38 @@
+<!--component/myprize/index.wxml-->
+<!--index.wxml--> 
+<my-component my-property='{{title}}' />  
+<view class="container">
+      <image class='logo' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/logo.png"></image>
+        <poster id="poster" hide-loading="{{true}}" preload="{{false}}" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail">
+      </poster>
+      <view class="center poster-box">
+         <image src="{{poster}}" class="poster" bindtap="showPoster"></image>
+
+<!--<image class='save' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/poster/changan.png"></image>--> 
+
+          <view class="save">“学富五车”就是你！ 长按存图炫耀一下！</view>
+
+         <view class="btns">
+               <button class='invitefriend' plain='true' open-type='share'>
+                  <image class='altarimg' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/poster/invite.png"></image>
+               </button>
+               <button class='continueAnswer' plain='true' bindtap='goAnswer' hidden="{{!isContinue}}">
+                  <image class='altarimg' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/poster/continue.png"></image>
+               </button>
+         </view>     
+      </view>
+
+      <!-- 通关奖励-->
+      <view class='mask' hidden="{{!hasGift}}">
+           <view class='reward-bg'>
+              <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/tongguan-jiangli.png"></image>
+              <image class='tikect' mode="aspectFit" src="{{gift.img}}"></image>
+              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip">
+                 <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
+              </button>
+           </view>
+      </view>
+
+     
+</view>
+

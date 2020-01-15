@@ -1,0 +1,116 @@
+<!--index.wxml-->  
+<my-component my-property='{{title}}' />  
+
+<view class="container">  
+      <image class='logo' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/logo.png"></image>
+     
+      <view class="sbox"> 
+            <view class='subject {{slideOut ? "slideOut" : ""}}'>
+                  <view class='questions'>
+                      <image class='questionsbg' mode="scaleToFill" src='{{baseUrl}}MiniProgram/images/question/titlebg.png'></image>
+                      <image class='question-head' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/question/timebg.png">
+                      <image class='quan {{timeout ? "" : "xuanzhuan"}}' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/question/quan.png"></image>
+                            <!-- 倒计时 -->
+                      <text class='count'>{{count}}</text> 
+
+                            <text class='level'>{{lvtext[userData.level - 1]}}Lv.{{userData.lvy}}</text>
+                            <view class='question'>第<text class='question-num'>{{subject.key + 1}}</text>题</view>
+                            <text class='question-total'>共<text class='total-number'>{{total}}</text>题</text>
+                      </image>
+                      <text class='question-title'>{{subject.title}}</text>
+                  </view>
+                  <view class="que-center">
+                        <button class="answer-one answer {{answer == index ? 'on' : ''}}" plain='true'  wx:for="{{subject.option_group}}" wx:key="index" 
+                        bindtap='choose'  data-answer="{{index}}" data-key="{{subject.key}}">
+                              <text class="answer-onefont answerfont">{{item}}</text>
+                        </button>
+                  </view>
+            </view>
+
+      </view>
+
+      <!-- <button class='problem' plain='true' open-type="feeback">
+            <image src='{{baseUrl}}/MiniProgram/images/question/problem.png'></image>
+      </button> -->
+
+      
+      <button class='alive' plain='true'>
+            <image src='{{baseUrl}}/MiniProgram/images/alive1.png'></image>
+            <text>续命卡{{userData.fu_num}}</text>
+      </button>
+
+      <view class='banner' bindtap="clickBanner" hidden="{{!ad}}">
+            <image  mode="scaleToFill" src='{{ad.img}}'></image>
+      </view>
+
+      <!-- 失败弹窗 hidden='{{!fail}}'-->
+      <view class='fail mask' hidden='{{!fail}}'>
+        <view class='failcenter center'>
+          <image mode='aspectFit' class='kuang' src='{{baseUrl}}/MiniProgram/images/fail.png'></image>
+          <view class="threebuttons">
+                  <button class='mask-btn3' plain='true' open-type="getPhoneNumber" bindgetphonenumber="registerVip" hidden="{{userData.is_vip == 1}}">
+                        <image src='{{baseUrl}}/MiniProgram/images/question/yijian.png'></image>
+                  </button>
+                  <button class='mask-btn1' plain='true' bindtap='revive'>
+                        <image src='{{baseUrl}}/MiniProgram/images/question/xuming.png'></image>
+                        <text>(续命卡:{{userData.fu_num}})</text>
+                  </button>
+                  <button class='mask-btn2' plain='true' open-type='share'>
+                        <image src='{{baseUrl}}/MiniProgram/images/question/laotie.png'></image>
+                  </button>
+                  
+          </view>
+          <image mode='aspectFit'  bindtap="giveup" class='close-help' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+        </view>
+      </view>
+
+      <!-- 等待弹窗 hidden='{{!shared}}'-->
+      <view class='wait mask' hidden='{{!shared}}'>
+        <view class='center'>
+          <image mode='aspectFit' class='kuang' src='{{baseUrl}}/MiniProgram/images/question/wait-k.png'></image>
+
+          <!-- <view class='count-box'>
+            <image mode='aspectFit' class='timebg' src='{{baseUrl}}/MiniProgram/images/timebg.png'></image>
+            <image mode='aspectFit' class='wait-quan {{helped ? "xuanzhuan" : ""}}' src='{{baseUrl}}/MiniProgram/images/zhuan.png'></image>
+            <text>{{waitText}}</text>
+          </view> -->
+        
+          <button class='mask-btn1' plain='true' open-type='share' >
+              <image src='{{baseUrl}}/MiniProgram/images/askmore.png'></image>
+          </button>
+            <button class='mask-btn2' plain='true' bindtap='giveup'>
+              <image src='{{baseUrl}}/MiniProgram/images/question/back.png'></image>
+          </button>
+
+           <image mode='aspectFit'  bindtap="giveup" class='close-help' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+        </view>
+      </view>
+
+      <!-- 得到复活卡 hidden='{{!showCard}}'-->
+      <view class="mask livecard" hidden='{{!showCard}}'>
+        <view class="center">
+            <text>恭喜您获得续命卡 X {{getCardNum}}</text>
+            <image mode='aspectFit' class='card' src='{{baseUrl}}/MiniProgram/images/alive3.png'></image>
+            <image mode='aspectFit' bindtap="closeCard" class='close-card' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+        </view>
+      </view>
+        
+      <!-- 成功弹窗 -->
+      <view class="mask success" hidden="{{!showSuccess}}">
+            <view class="center">
+                  <image class="success-k" src="{{baseUrl}}MiniProgram/images/poster/suc-widnow.png" />
+                  <text class="you">{{userData.cos}}ml</text>
+                  <view class="suc-btns">
+                        <button class='continue' plain='true' bindtap="continue" >
+                              <image src='{{baseUrl}}MiniProgram/images/poster/continue-big.png'></image>
+                        </button>  
+                        <button class='xz' plain='true' open-type="share" data-name="xuanyao">
+                              <image src='{{baseUrl}}MiniProgram/images/poster/xy.png'></image>
+                        </button>  
+                  </view>
+            <image mode='aspectFit'  bindtap="giveup" class='close-help' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+
+            </view>
+      </view>
+      
+</view>

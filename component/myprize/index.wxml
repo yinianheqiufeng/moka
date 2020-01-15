@@ -1,0 +1,137 @@
+<!--component/myprize/index.wxml-->
+<my-component my-property='{{title}}' />  
+<!--index.wxml--> 
+<view class="container">
+      <image class='logo' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/logo.png"></image>
+
+      <view class="center myprize"> 
+        <image src="{{baseUrl}}/MiniProgram/images/award/my-window.png" class="myprize-img"></image>
+
+        <view class="tabbar flex">
+          <view bindtap="switchType" data-type="1" class="{{type == 1 ? 'on' : ''}}">
+            <text>兑换记录</text>
+          </view>
+          <view bindtap="switchType" data-type="2" class="{{type == 2 ? 'on' : ''}}">
+            <text>通关奖励</text>
+          </view>
+          <view bindtap="switchType" data-type="3" class="{{type == 3 ? 'on' : ''}}">
+            <text>中奖奖品</text>
+          </view>
+        </view>
+
+       <scroll-view class="coupon-wrap" scroll-y="{{true}}">
+        <view class="coupon-list flex" hidden="{{type != 1}}">
+          <view class="coupon-item" wx:for="{{duihuanjilu}}" wx:key="index" >
+            <!-- <image class='coupon' src='{{item.gift_img}}'></image>-->
+           <view class="coupon-single">
+             <view class="flex">
+              <image src="{{item.gift_img}}" class="gift-img" />
+               <view class="right">
+                 {{item.gift_name}}
+               </view>
+               <image data-id="{{item.id}}" bindtap="goZhongjiang" src="{{baseUrl}}/MiniProgram/images/award/use.png" class="use" />
+             </view>
+             <view class="cbottom {{isClose == item.id && type == 1? '' : 'on'}}">
+             <image src="{{baseUrl}}/MiniProgram/images/award/arrow2.png" data-id="{{item.id}}" class="carrow {{isClose == item.id && type == 1 ? '' : 'on'}}" catchtap="shouqi" />
+               <text class="coupon-content {{isClose == item.id && type == 1? '' : 'on'}}">
+                {{item.content ? item.content : ''}}       
+               </text>
+             </view>
+           </view>
+          </view>
+        </view>
+        <view class="coupon-list flex type2" hidden="{{type != 2}}">
+          <view class="coupon-item" wx:for="{{tongguanjiangli}}" wx:key="index" data-id="{{item.id}}">
+            <!--<text>{{item.gift_name}}</text>-->
+            
+            <view class="coupon-single">
+              <image src="{{item.gift_img}}" class="gift-img" />
+              <view class="flex">
+                <view class="right">
+                  {{item.gift_name}}
+                </view>
+                <image data-id="{{item.id}}" bindtap="goZhongjiang" src="{{baseUrl}}/MiniProgram/images/award/use.png" class="use" />
+              </view>
+              <view class="cbottom {{isClose == item.id && type == 2? '' : 'on'}}">
+              <image src="{{baseUrl}}/MiniProgram/images/award/arrow2.png" data-id="{{item.id}}" class="carrow {{isClose == item.id && type == 2 ? '' : 'on'}}" catchtap="shouqi" />
+                <text class="coupon-content {{isClose == item.id && type == 2? '' : 'on'}}">
+                  {{item.content ? item.content : ''}}       
+                </text>
+              </view>
+           </view>
+
+          </view>
+        </view>
+        <view class="coupon-list flex type3" hidden="{{type != 3}}">
+          <view class="coupon-item" wx:for="{{zhongjiangjilu}}" wx:key="index">
+            <!-- <image class='coupon' src='{{item.gift_img}}'></image> -->
+
+             <view class="coupon-single">
+              <view class="flex">
+               <image src="{{item.config_prize.img}}" class="gift-img" />
+                <view class="right">
+                  {{item.prize}}
+                </view>
+                <image data-id="{{item.id}}" bindtap="goZhongjiang" data-id="{{item.id}}" data-prize="{{item}}" data-types="{{item.types}}" src="{{baseUrl}}/MiniProgram/images/award/use.png" class="use" />
+              </view>
+              <view class="cbottom {{isClose == item.id && type == 3? '' : 'on'}}">
+              <image src="{{baseUrl}}MiniProgram/images/award/arrow2.png" data-id="{{item.id}}" class="carrow {{isClose == item.id && type == 3 ? '' : 'on'}}" catchtap="shouqi" />
+                <text class="coupon-content {{isClose == item.id && type == 3? '' : 'on'}}">
+                  {{item.config_prize.content ? item.config_prize.content : ''}}       
+                </text>
+              </view>
+           </view>
+            
+          </view>
+        </view>
+      </scroll-view>
+
+      </view>
+      <!-- <image class='hr' mode="aspectFill" src='{{baseUrl}}/MiniProgram/images/rank/bar.png'></image> -->
+
+<!-- 地址弹窗    -->
+  <view class="mask" hidden="{{!showAddress}}">
+    <view class="center inputcenter">
+      <text class='getshiwu'>{{prize.prize}}</text>
+       <view class='messages'>
+              <input value="{{form.name}}" type="text" class='inputname' placeholder="请填写姓名" bindinput="inputName" placeholder-style="color:#ffd924;"/>
+              <input value="{{form.phone}}" class="weui-input inputphone" type="number" maxlength="11" placeholder="请填写手机号" bindinput="inputPhone" placeholder-style="color:#ffd924;"/>
+              <input value="{{form.address}}" class="text inputaddress" type="text" placeholder="请填写收货地址" bindinput="inputAddress" placeholder-style="color:#ffd924;"/>
+            <button class='submit' bindtap="tijiao" plain='true'>
+                  <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/getwindow/get.png"></image>
+            </button>
+       </view>
+        <image class="close-message" bindtap="closeAddress" src='{{baseUrl}}MiniProgram/images/close.png'></image>
+    </view>
+
+  </view>
+
+<!-- 奖品详情    -->
+  <view class="mask detail" hidden="{{!showDetail}}">
+        <view class='center mask-window'>
+              <!--<scroll-view class="scroller" scroll-y="{{true}}">
+                        <text class="title">{{detail.name}}</text>
+                        <text class="content">{{detail.content}}</text>
+                        
+              </scroll-view> 
+                <button bindtap="goZhongjiang" class='duihuan-button' plain='true'>
+                  <image src="{{baseUrl}}MiniProgram/images/lijishiyong.png"></image>
+                </button>-->
+
+              <view class="center">
+                <text class="quanma" selectable="{{true}}">{{detail.code}}</text>
+
+                  <text class="tip">(长按可以复制券码)</text>
+              </view>
+
+           
+
+              <button bindtap="cancel" class="close" plain='true'>
+                  <image src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+              </button>
+        </view>
+  </view>
+      
+     
+</view>
+

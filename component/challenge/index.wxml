@@ -1,0 +1,39 @@
+<!--index.wxml--> 
+<my-component my-property='{{title}}' />  
+
+<view class="container">
+      <image class='logo' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/logo.png"></image>
+      <image class='car' mode="aspectFit" src="{{config.change_banner}}"></image>
+
+      <button class='action animated pulse infinite' plain='true' bindtap='startTest'>
+            <image src='{{config.button4}}'></image>
+      </button>
+
+      <button class='rank  infinite' plain='true' bindtap='goRank'>
+            <image src='{{config.button5}}'></image>
+      </button>
+  
+      <button class='alive  infinite' plain='true' bindtap='fuhuo' data-name="fuhuo" wx:if="{{userData.fu_num > 0}}">
+            <image src='{{config.button6}}'></image>
+            <text>续命卡:{{userData.fu_num}}</text>
+      </button>
+      <button class='alive  infinite' plain='true' data-name="fuhuo" open-type="share" wx:else>
+            <image src='{{config.button6}}'></image>
+            <text>续命卡:{{userData.fu_num}}</text>
+      </button>
+
+      <button class='rule ' plain='true' bindtap='seeRule'>
+            <image src='{{baseUrl}}/MiniProgram/images/game-rule.png'></image>
+      </button>
+
+      <view class="mask see-rule" hidden="{{!showRule}}">
+         <view class="rulecenter">
+            <image class="kuang" src='{{baseUrl}}/MiniProgram/images/rule/kuang.png'></image>
+          <scroll-view class="rule-wrap" scroll-y="{{true}}" scroll-with-animation="true">
+            <image mode="widthFix" class="rule-img" src='{{config.activity_rules}}'></image>
+          </scroll-view>
+           <image class="close" bindtap="closeRule" src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+         </view>
+      </view>
+    
+</view>

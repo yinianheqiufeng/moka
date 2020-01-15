@@ -1,0 +1,95 @@
+/**index.wxss**/
+ 
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: url(https://ca.hj388.cn/yc/MiniProgram/images/bg.png) no-repeat 0 0 / 100% 100%;
+}
+
+.car {
+  width: 750rpx;
+  height: 787rpx;
+  position: absolute;
+  top: 7vh;
+  left: calc(50% - 375rpx);
+}
+@media screen and (min-height: 684px) {
+  .car{
+    top: 15vh;
+  }
+}
+
+.action{
+  width: 630rpx;
+  height: 126rpx;
+  position: absolute;
+  left: calc(50% - 315.5rpx);
+  bottom: 28%;}
+
+.rank{
+  width: 317rpx;
+  height: 103rpx;
+  position: absolute;
+  left: 8%;
+  bottom: 16%;
+}
+.alive{
+  width: 312rpx;
+  height: 103rpx;
+  position: absolute;
+  right: 8%;
+  bottom: 16%;
+}
+
+.alive text {
+  position: absolute;
+  left: 0;
+  color: #174a3c;
+  top: 6%;
+  width: 100%;
+  height: 100%;
+  /* -webkit-text-stroke: .6px #087156; */
+  /* text-shadow: 0.5px 1px #087156; */
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  box-sizing: border-box;
+  padding-left: 15%;
+}
+
+.rule{
+  width: 170rpx;
+  height: 53rpx;
+  position: absolute;
+  right: -1%;
+  top: 10%;
+  }
+
+.center{
+  width: 700rpx;
+}
+ .kuang{
+   width: 100%;
+   height: 900rpx;
+ }
+ .rulecenter{position: absolute;width: 750rpx;height: 1016rpx;left: calc(50% - 375rpx);top: 10%;}
+ .rule-wrap{
+   width: 554rpx;
+   height: 700rpx;
+   position: absolute;
+   top: 12%;
+   left: calc(50% - 280rpx);
+
+ }
+ .rule-img{
+   width: 100%;
+ }
+.close{
+  width: 65rpx;
+  height:65rpx;
+  position: absolute;
+  right: 10%;
+  top: 2%;
+  z-index: 10
+}

@@ -1,0 +1,38 @@
+/* component/suceess/index.wxss */
+/* component/myprize/index.wxss */
+
+/**index.wxss**/
+.poster-box{
+  width:100%;
+  top:56%;
+}
+.poster{
+  width:calc(662rpx * .9);
+  height:calc(1003rpx * .9);
+  margin:0 auto;
+}
+/* .save{width:241rpx;height:29rpx;left: calc(50% - 120.5rpx);bottom: 18%;margin:20rpx auto 5vh;} */
+.save{width: 100%;font-size: 15px;color: #70321d;text-align: center;margin-top: 20rpx;}
+.invitefriend{width:263rpx;height:80rpx;z-index: 50;margin: 0  20rpx;}
+.continueAnswer{width:263rpx;height:80rpx;z-index: 50;margin: 0  20rpx;}
+
+.btns{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 40rpx;
+}
+
+
+/* 通关奖励 默认是关闭*/
+.reward-window{display: none;}
+.reward-bg{position: absolute;width:750rpx;height:632rpx;left: calc(50% - 375rpx);top:25%;}
+.tikect{position: absolute;width:271rpx;height:127rpx;left: calc(50% - 135.5rpx);top: 40%;}
+.nowget{position: absolute;width:331rpx;height: 81rpx;left: calc(50% - 165.5rpx);bottom: 11%}
+
+@media screen and (min-height: 684px) {
+  .btns{
+    margin-top:80rpx;
+  }
+}

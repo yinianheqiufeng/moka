@@ -1,0 +1,126 @@
+<!--index.wxml-->
+<my-component my-property='{{title}}' />  
+
+<view class='lottery'>
+  <image class='logo' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/logo.png"></image>
+  <image class='rule' bindtap='seeRule' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/choujiang/choujiang-rule.png"></image>
+  <image class='luckdraw' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/choujiang/head.png?v=5"></image>
+  <view class="draw-neadoil">
+      <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/choujiang/choujiang-xh.png"></image>
+      <text class="draw-notice">每次抽奖需消耗<text class="nead-oil">{{config.haoyou}}</text>ML汽油</text>
+  </view>
+  <view class='box-kuang'>
+    <image class='white animated flash infinite' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/choujiang/bai.png"></image>
+    <image class='orange animated flash infinite' mode="aspectFit" src="{{baseUrl}}MiniProgram/images/choujiang/cheng.png"></image>
+    <view class="box">
+      <view bindtap="cj" class="list {{disabled ? 'grey' : ''}}"></view>
+
+      <!-- 授权按钮,授权之后才可以抽奖 -->
+      <button class="lsbtn" open-type="getPhoneNumber" bindgetphonenumber="registerVip" hidden="{{!showBtn}}"></button>
+
+      <block wx:for="{{prizeList}}" wx:key="index">
+        <view class="list {{cjChange == index + 1 ? 'change_in' : ''}}">
+          <view class="list_t">
+            <image src="{{item.img}}"></image>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <button class='myaward animated pulse infinite' plain='true' bindtap="goMyprize">
+    <image mode="aspectFit" src="https://ca.hj388.cn/yc/MiniProgram/images/choujiang/award.png"></image>
+  </button>
+
+  <button class='winoil animated pulse infinite' plain='true' bindtap="goAnswer">
+    <image mode="aspectFit" src="https://ca.hj388.cn/yc/MiniProgram/images/choujiang/win.png"></image>
+  </button>
+
+
+
+  <!-- 规则弹窗 -->
+   <view class="mask see-rule" hidden="{{!showRule}}">
+         <view class="choujiangcenter">
+            <image class="choujiangkuang" src='{{baseUrl}}/MiniProgram/images/rule/choujiang-kuang.png'></image>
+          <scroll-view class="rule-wrap" scroll-y="{{true}}" scroll-with-animation="true">
+            <image mode="widthFix" class="rule-img" src='{{config.draw_rule}}'></image>
+          </scroll-view>
+          		
+           <image class="close" bindtap="closeRule" src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+         </view>
+      </view>
+
+
+  
+  <!-- 中奖弹窗 -->
+  <view class="mask" hidden="{{!showDraw}}">
+    <view class='draw-box'>
+      <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/getwindow/box.png?v=2"></image>
+      <image class="draw-close" bindtap="closeDraw" src='{{baseUrl}}MiniProgram/images/close.png'></image>
+      <block wx:if="{{prize.types == 1 || prize.types == 2 || prize.types == 3 || prize.types == 4}}">
+        <text class='getaward'>{{prize.prize}}</text>
+      </block>
+      <!--<block wx:if="{{prize.types == 4}}">
+        <text class='getaward'>{{prize.pirze}}</text>
+      </block>-->
+      <button class='getdown' bindtap="shouxiajiangli" plain='true'>
+        <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/getwindow/get.png"></image>
+      </button>
+    </view>
+  </view>
+
+
+   <!-- 未中奖弹窗  
+  <view class="mask"  >
+    <view class='weizhongjiang'>
+      <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/award/nowon.png"></image>
+      <image class="nodraw-close" bindtap="closenoDraw" src='{{baseUrl}}MiniProgram/images/close.png'></image>
+       <text class='getaward' wx:if="{{prize.types == 6}}">谢谢参与</text>
+      <button class='zaichouyici' bindtap="closenoDraw" plain='true' wx:if="{{prize.types == 5}}">
+        <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/award/again.png"></image>
+      </button>
+    </view>
+  </view>-->
+
+<!-- 未中奖弹窗 -->
+  <view class="mask" hidden="{{!showWei}}">
+    <view class='weizhongjiang center'>
+      <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/nowin.png"></image>
+      <image class="nodraw-close" bindtap="closenoDraw" src='{{baseUrl}}MiniProgram/images/close.png'></image>
+      <button class='zaichouyici' bindtap="closenoDraw" plain='true'>
+        <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/award/again.png"></image>
+      </button>
+    </view>
+  </view>
+
+
+<!-- 谢谢参与  hidden="{{!showThanks}}"-->
+  <view class="mask" hidden="{{!showThanks}}">
+    <view class='weizhongjiang center'>
+      <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/thankyou.png"></image>
+      <image class="nodraw-close" bindtap="closeThanks" src='{{baseUrl}}MiniProgram/images/close.png'></image>
+    </view>
+  </view>
+
+
+<!-- 地址弹窗    -->
+  <view class="mask" hidden="{{!showAddress}}">
+    <view class="center inputcenter">
+      <text class='getshiwu'>{{prize.prize}}</text>
+       <view class='messages'>
+              <input value="{{form.name}}" type="text" class='inputname' placeholder="请填写姓名" bindinput="inputName" placeholder-style="color:#ffd924;"/>
+              <input value="{{form.phone}}" class="weui-input inputphone" type="number" maxlength="11" placeholder="请填写手机号" bindinput="inputPhone" placeholder-style="color:#ffd924;"/>
+              <input value="{{form.address}}" class="text inputaddress" type="text" placeholder="请填写收货地址" bindinput="inputAddress" placeholder-style="color:#ffd924;"/>
+            <button class='submit' bindtap="tijiao" plain='true'>
+                  <image mode="aspectFit" src="{{baseUrl}}MiniProgram/images/getwindow/get.png"></image>
+            </button>
+       </view>
+        <image class="close-message" bindtap="closeAddress" src='{{baseUrl}}MiniProgram/images/close.png'></image>
+    </view>
+
+  </view>
+
+
+
+
+</view>

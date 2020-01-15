@@ -1,0 +1,67 @@
+<my-component my-property='{{title}}' />  
+
+<view class="container">
+      <image class='logo' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/logo.png"></image>
+      <view class="user flex">
+        <view class="left"> 
+            <image class='altarimg' mode="aspectFit" src="{{userData.pic}}"></image>
+            <view class='nickname'>
+              <text class="lv">{{lvtext[userData.level - 1]}}LV.{{userData.lvy}}</text>
+              <text class="name">{{userData.nickname}}</text>
+            </view>
+        </view>
+          <view class='current'>当前油量：<view class='oilnum'>{{userData.quantity}}ml</view></view>
+      </view>
+
+     
+      <view class='duihuan-buttons'>
+          <!--<button class='button1' plain='true' bindtap="goMoka">
+              <image mode="aspectFit" src="{{config.button7}}"></image>
+          </button>-->
+          <button class='button2' plain='true' bindtap="goJiayou">
+              <image mode="aspectFit" src="{{config.button8}}"></image>
+          </button>
+          <button class='button3' plain='true' bindtap="goChoujiang">
+              <image mode="aspectFit" src="{{config.button9}}"></image>
+          </button>
+          <button class='button4' plain='true' bindtap="goMyprize">
+              <image mode="aspectFit" src="{{config.button10}}"></image>
+          </button>
+      </view>
+
+      <image class='duihuan-bar' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/exchange/duihuan.png"></image>
+
+
+      <view class="myprize">
+        <image src="{{baseUrl}}/MiniProgram/images/exchange/bg.png" class="myprize-img"></image>
+             <scroll-view class="coupon-wrap" scroll-y="{{true}}">
+                  <view class="coupon-list flex">
+                    <view class="coupon-item" wx:for="{{giftList}}" wx:key="index" bindtap="checkDetail" data-id="{{item.id}}">
+                      <image class='coupon' src='{{item.img}}'></image>
+                      <!-- <text decode="{{true}}">{{item.content}}</text> -->
+                    </view>
+                  </view>
+                </scroll-view>
+      </view>
+
+<!-- hidden="{{!showDetail}}" -->
+      <view class="mask detail" hidden="{{!showDetail}}">
+            <view class='center mask-window'>
+                  <scroll-view class="scroller" scroll-y="{{true}}">
+                            <text class="title">{{detail.name}}</text>
+                            <text class="content">{{detail.content}}</text>
+                            
+                  </scroll-view>
+
+                  
+                     <button open-type='getPhoneNumber' bindgetphonenumber='registerVip' class='duihuan-button' plain='true'>
+                        <image src='{{baseUrl}}/MiniProgram/images/exchange/lijiduihuan.png'></image>
+                    </button>
+                 
+                  <button bindtap="cancel" class="close" plain='true'>
+                      <image src='{{baseUrl}}/MiniProgram/images/close.png'></image>
+                  </button>
+            </view>
+      </view>
+     
+</view>
