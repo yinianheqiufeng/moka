@@ -24,10 +24,7 @@ Page({
   onLoad: function () {
     
 
-    millionAnswer.reportEvent(1,'xb00000100010001',{
-      page_id:'component/challenge/index',
-      desc:'开始挑战页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100010001')
 
   },
  
@@ -35,10 +32,7 @@ Page({
 
     this.getUser()
 
-    millionAnswer.reportEvent(1,'xb00000100010001',{
-      page_id:'component/challenge/index',
-      desc:'开始挑战页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100010001')
    
     setTimeout(() => {
       millionAnswer.globalData.bgm.play()
@@ -47,10 +41,7 @@ Page({
   },
   
   onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100010001',{
-      page_id:'component/challenge/index',
-      desc:'开始挑战页页面离开'
-    })
+    millionAnswer.reportEvent(2,'xb00000100010001')
 
     // "requiredBackgroundModes": ["audio"],
   },

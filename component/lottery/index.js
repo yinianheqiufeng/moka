@@ -171,10 +171,7 @@ Page({
 
     })   
     
-    millionAnswer.reportEvent(3,'xb00000100040004',{
-      page_id:'component/lottery/index',
-      desc:'用户触发抽奖事件'
-    })
+    millionAnswer.reportEvent(3,'xb00000100040004')
 
   },
 
@@ -394,16 +391,10 @@ Page({
 
     // console.log(this.data.config)
 
-    millionAnswer.reportEvent(1,'xb00000100040004',{
-      page_id:'component/lottery/index',
-      desc:'抽奖页面页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100040004')
   },
   onShow(){
-    millionAnswer.reportEvent(1,'xb00000100040004',{
-      page_id:'component/lottery/index',
-      desc:'抽奖页面页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100040004')
 
     setTimeout(() => {
       millionAnswer.globalData.bgm.play()
@@ -412,10 +403,7 @@ Page({
   },
 
   onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100040004',{
-      page_id:'component/lottery/index',
-      desc:'抽奖页面页面离开'
-    })
+    millionAnswer.reportEvent(2,'xb00000100040004',)
 
     let pages = getCurrentPages(); 
     let l = pages.length; 

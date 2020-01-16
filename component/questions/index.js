@@ -223,10 +223,7 @@ haoyou 抽奖耗油量 */
           // millionAnswer.createEffect('right')
           millionAnswer.createEffect('success')
 
-          millionAnswer.reportEvent(3,'xb00000100060010',{
-            desc:`用过通过第${millionAnswer.globalData.userData.reached}关`,
-            name:millionAnswer.globalData.userData.reached
-          })
+          millionAnswer.reportEvent(3,'xb00000100060010')
 
           if(res.data.gift && res.data.gift.id != ''){  //有额外券
             if(res.data.dat == 1){  //有券且升级的情况
@@ -396,7 +393,7 @@ haoyou 抽奖耗油量 */
       })
 
       millionAnswer.reportEvent(3,'xb00000100080010',{
-        desc:`Banner 的点击事件 - 跳H5`,
+        // desc:`Banner 的点击事件 - 跳H5`,
         url:ad.url
       })
 
@@ -406,7 +403,7 @@ haoyou 抽奖耗油量 */
     }else if(ad.types == 2){   //小程序
 
       millionAnswer.reportEvent(3,'xb00000100080010',{
-        desc:`Banner 的点击事件 - 跳小程序`,
+        // desc:`Banner 的点击事件 - 跳小程序`,
         url:ad.appidurl,
         appid:ad.appid
       })
@@ -591,10 +588,7 @@ haoyou 抽奖耗油量 */
     this.getSubject()
     this.getUser()
 
-    millionAnswer.reportEvent(1,'xb00000100060006',{
-      page_id:'component/questions/index',
-      desc:'答题页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100060006')
 
     // if(!this.data.fail){  //接着上次计时
     //   this.setData({
@@ -644,18 +638,12 @@ haoyou 抽奖耗油量 */
     millionAnswer.createEffect('cj',true)  //暂停抽奖音乐
     millionAnswer.globalData.bgm.play()
 
-    millionAnswer.reportEvent(1,'xb00000100060006',{
-      page_id:'component/questions/index',
-      desc:'答题页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100060006')
   },
 
 
   onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100060006',{
-      page_id:'component/questions/index',
-      desc:'答题页页面离开'
-    })
+    millionAnswer.reportEvent(2,'xb00000100060006')
 
     millionAnswer.refreshUserdata()
 
@@ -734,9 +722,7 @@ haoyou 抽奖耗油量 */
       // // 来自页面内转发按钮
       // if (this.data.shared) return
 
-      millionAnswer.reportEvent(3,'xb00000100090010',{
-        desc:`复活邀请好友（分享）`,
-      })
+      millionAnswer.reportEvent(3,'xb00000100090010',)
 
       if(res.target.dataset.name == 'xuanyao'){
 

@@ -63,10 +63,7 @@ Page({
       this.getUser('')
     }
 
-    millionAnswer.reportEvent(1,'xb00000100020002',{
-      page_id:'/component/firstpage/index',
-      desc:'首页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100020002')
 
       
   },
@@ -74,20 +71,14 @@ Page({
     // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
   onShow(){  
-    millionAnswer.reportEvent(1,'xb00000100020002',{
-      page_id:'/component/firstpage/index',
-      desc:'首页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100020002')
 
     setTimeout(() => {
       millionAnswer.globalData.bgm.play()
     },200)
   },
   onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100020002',{
-      page_id:'/component/firstpage/index',
-      desc:'首页页面离开'
-    })
+    millionAnswer.reportEvent(2,'xb00000100020002')
   },
   markUser(params){  //记录用户
     apiMarkUser(params).then(res => {
@@ -102,6 +93,7 @@ Page({
           }
           this.setData({
             userData: res.data,
+            youliangtext:text,
             isRegister:res.data.is_vip == 1 ? true : false
           })
           millionAnswer.globalData.userData = res.data

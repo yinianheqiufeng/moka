@@ -25,17 +25,11 @@ Page({
   onLoad: function () {
     
     this.getRank()
-    millionAnswer.reportEvent(1,'xb00000100070007',{
-      page_id:'component/rank/index',
-      desc:'排行榜页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100070007')
   },
 
   onShow(){
-    millionAnswer.reportEvent(1,'xb00000100070007',{
-      page_id:'component/rank/index',
-      desc:'排行榜页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100070007')
     // if(millionAnswer.globalData.bgm.paused){   //是否在播放 true 已经暂停
     //   millionAnswer.globalData.bgm.play()  //播放背景音乐
     // }
@@ -45,10 +39,7 @@ Page({
   },
 
   onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100070007',{
-      page_id:'component/rank/index',
-      desc:'排行榜页页面离开'
-    })
+    millionAnswer.reportEvent(2,'xb00000100070007')
   },
   onHide(){
     millionAnswer.globalData.bgm.pause()  //暂停背景音乐

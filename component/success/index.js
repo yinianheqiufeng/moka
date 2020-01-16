@@ -63,8 +63,6 @@ Page({
   getHaibao(){   //提交答案绑定用户的排名，没关所获 和 设置海报
     
     millionAnswer.buildCode().then(data => {  //先生成小程序二维码，再请求排名数据
-      let key = this.data.gift.key
-      let answer = this.data.gift.answer
 
       apiGetUser().then(res => {
         let user = res.data
@@ -140,7 +138,7 @@ Page({
       })
     }else{
       millionAnswer.reportEvent(3,'xb00000100050010',{
-        desc:`用过进入第${millionAnswer.globalData.userData.reached}关`,
+        // desc:`用过进入第${millionAnswer.globalData.userData.reached}关`,
         name:millionAnswer.globalData.userData.reached
       })
   
@@ -258,10 +256,7 @@ Page({
       config:millionAnswer.globalData.config
     })
 
-    millionAnswer.reportEvent(1,'xb00000100100010',{
-      page_id:'component/success/index',
-      desc:'每次闯关成功页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100100010')
 
     if(options.gift){
       let gift = JSON.parse(options.gift)
@@ -342,10 +337,7 @@ Page({
   },
 
   onShow(){
-    millionAnswer.reportEvent(1,'xb00000100100010',{
-      page_id:'component/success/index',
-      desc:'每次闯关成功页页面展现'
-    })
+    millionAnswer.reportEvent(1,'xb00000100100010')
 
     millionAnswer.createEffect('success')
     
@@ -359,10 +351,7 @@ Page({
   },
 
   onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100100010',{
-      page_id:'component/success/index',
-      desc:'每次闯关成功页页面离开'
-    })
+    millionAnswer.reportEvent(2,'xb00000100100010')
     // let pages = getCurrentPages(); 
     // let l = pages.length; 
     // let prev = pages[l - 2];
@@ -382,7 +371,7 @@ Page({
       // 来自页面内转发按钮
       millionAnswer.createEffect('click')
       millionAnswer.reportEvent(3,'xb00000100090010',{ 
-        desc:`复活邀请好友（分享）`,
+        // desc:`复活邀请好友（分享）`,
       })
     }
 
