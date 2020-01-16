@@ -87,7 +87,8 @@ Page({
           let you = parseInt(res.data.quantity)
           let text = ''
           if(you > 999){
-            text = Math.floor(you / 1000) + 'L'
+              let  t = you / 1000 + ''
+              text = t.substring(0,4) + 'L'
           }else{
             text = you + 'ml'
           }
@@ -146,7 +147,8 @@ Page({
         let you = parseInt(res.data.quantity)
         let text = ''
         if(you > 999){
-          text = Math.floor(you / 1000) + 'L'
+              let  t = you / 1000 + ''
+              text = t.substring(0,4) + 'L'
         }else{
           text = you + 'ml'
         }

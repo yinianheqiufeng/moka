@@ -48,6 +48,7 @@ Page({
     hasGift:false,
     gift:{},
     isJumpBanner:false,
+    hasTimer:false
   },
 
 /*获取配置 
@@ -290,6 +291,8 @@ haoyou 抽奖耗油量 */
   },
   countDown(){  //答题倒计时
 
+    if(this.data.hasTimer) return
+
     let timer = setInterval(() => {
       if(this.data.count > 0 && !this.data.timeout){
         let count = this.data.count 
@@ -301,6 +304,7 @@ haoyou 抽奖耗油量 */
         clearInterval(timer)
         this.setData({   //暂停时间
           timeout:true,
+          hasTimer:false
         })
 
         if(this.data.count == 0){  
@@ -317,6 +321,10 @@ haoyou 抽奖耗油量 */
         }
       }
     },1000)
+
+    this.setData({
+      hasTimer:true
+    })
   },
   revive(){  //复活
     if (this.data.userData.fu_num > 0){
@@ -379,6 +387,7 @@ haoyou 抽奖耗油量 */
     millionAnswer.createEffect('click')
 
     let ad = this.data.ad
+
     // this.setData({
     //   isJumpBanner:true
     // })
@@ -582,6 +591,59 @@ haoyou 抽奖耗油量 */
       showSuccess:true
     })
   },
+  saveTime(){  //离开页面时保存时间戳
+    if (!this.data.fail) {  //没有失败，还在答题的情况，暂停计时
+        if(this.data.isJumpBanner){  //判断是否是点击banner跳转
+          this.setData({
+            timeout: true,
+            fail:false
+          })
+        }else{
+          //保存时间和秒数
+          let time = new Date().getTime()
+          wx.setStorageSync('time', time)
+          wx.setStorageSync('count', this.data.count)
+        }
+      }
+    },
+  getTime(){  //获取和设置保存的时间戳
+      if(wx.getStorageSync('time')){  //判断有没有保存时间戳
+        let now = new Date().getTime()
+        let count = wx.getStorageSync('count')
+        let time = wx.getStorageSync('time')
+
+        let cha = now - time
+        if(cha / 1000 > count){  //大于上次保存的秒数
+          this.setData({
+            timeout:true,
+            fail:true,
+            count:0,
+          })
+        }else{  //还在倒计时间内
+          if(!this.data.fail){  
+            count = parseInt( count - (cha / 1000))
+            
+            this.setData({
+              timeout:false,
+              fail:false,
+              count,
+            })
+            this.countDown()
+          }
+        }
+        
+        wx.setStorageSync('time',null)
+        wx.setStorageSync('count',15)
+      }else{
+        if(!this.data.fail){  //接着上次计时
+          this.setData({
+            timeout:false,
+            fail:false
+          })
+          this.countDown()
+        }
+      }
+  },
 
   //事件处理函数
   onLoad: function () {
@@ -598,42 +660,7 @@ haoyou 抽奖耗油量 */
     //   this.countDown()
     // }
 
-    if(wx.getStorageSync('time')){  //判断有没有保存时间戳
-      let now = new Date().getTime()
-      let count = wx.getStorageSync('count')
-      let time = wx.getStorageSync('time')
-
-      let cha = now - time
-      if(cha / 1000 > count){  //大于上次保存的秒数
-        this.setData({
-          timeout:true,
-          fail:true,
-          count:0,
-        })
-      }else{  //还在倒计时间内
-        if(!this.data.fail){  
-          count = parseInt( count - (cha / 1000))
-          
-          this.setData({
-            timeout:false,
-            fail:false,
-            count,
-          })
-          this.countDown()
-        }
-      }
-      
-      wx.setStorageSync('time',null)
-      wx.setStorageSync('count',15)
-    }else{
-      if(!this.data.fail){  //接着上次计时
-        this.setData({
-          timeout:false,
-          fail:false
-        })
-        this.countDown()
-      }
-    }
+    this.getTime()
 
     millionAnswer.createEffect('cj',true)  //暂停抽奖音乐
     millionAnswer.globalData.bgm.play()
@@ -647,22 +674,7 @@ haoyou 抽奖耗油量 */
 
     millionAnswer.refreshUserdata()
 
-    if (!this.data.fail) {  //暂停计时
-      // this.setData({
-      //   timeout: true,
-      //   fail:false
-      // })
-      if(this.data.isJumpBanner){  //判断是否是点击banner跳转
-        this.setData({
-          timeout: true,
-          fail:false
-        })
-      }else{
-        let time = new Date().getTime()
-        wx.setStorageSync('time', time)
-        wx.setStorageSync('count', this.data.count)
-      }
-    }
+    this.saveTime()
 
     if(this.data.checkTimer){  //清除等待好友复活的计时器
       clearInterval(this.data.checkTimer)
@@ -687,6 +699,8 @@ haoyou 抽奖耗油量 */
         })
         this.countDown()
       }
+    }else{
+      this.getTime()
     }
 
     setTimeout(() => {
@@ -703,13 +717,9 @@ haoyou 抽奖耗油量 */
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    if (!this.data.fail) {  //暂停计时
-      this.setData({
-        timeout: true,
-        fail:false
-      })
-    }
-    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    this.saveTime()
+    
+    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
 
 
     
