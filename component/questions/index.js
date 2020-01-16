@@ -857,7 +857,7 @@ haoyou 抽奖耗油量 */
   onHide: function () {
     this.saveTime()
     
-    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
     
   },
   //分享，邀请好友

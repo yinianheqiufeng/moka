@@ -60,7 +60,7 @@ Page({
     millionAnswer.reportEvent(1, 'xb00000100020002')
   },
   onHide () {
-    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
   onShow () {
     millionAnswer.reportEvent(1, 'xb00000100020002')

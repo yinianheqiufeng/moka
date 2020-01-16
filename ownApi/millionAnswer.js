@@ -21,12 +21,13 @@ class MillionAnswer {
             baseUrl: 'https://ca.hj388.cn/yc/', //当前的域名，用于拼接图片等资源
             userData: {}, //用户的答题信息
             share: {},
-            bgm: null,
+            // bgm: wx.getBackgroundAudioManager(),
+            bgm: wx.createInnerAudioContext(),
             audio: null,
             musicArr: [],
             stopAudio: false,
             config: {},
-            marr:[]
+            marr:[],
         }
 
         this.init()
@@ -79,13 +80,10 @@ class MillionAnswer {
         ]
 
         this.createBgm()
-        this.globalData.audio = wx.createInnerAudioContext()
         this.preloadMusic()
     }
 
     createBgm() { //设置全局背景音乐
-
-        this.globalData.bgm = wx.getBackgroundAudioManager()
         let bgm = this.globalData.bgm
         bgm.title = 'bgm'
         // 设置了 src 之后会自动播放
@@ -133,7 +131,7 @@ class MillionAnswer {
 
     buildCode() { //生成小程序码 
         return createQRCode({
-            path: '/component/firstpage/index',
+            path: 'subPackages/activities/answer/component/firstpage/index',
             scene: ``,
             width: '200'
         })

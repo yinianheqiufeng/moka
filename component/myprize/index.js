@@ -288,7 +288,7 @@ Page({
     millionAnswer.reportEvent(2,'xb00000100050005')
   },
   onHide(){
-    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
   /**
    * 用户点击右上角分享

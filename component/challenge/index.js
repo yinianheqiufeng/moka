@@ -34,11 +34,10 @@ Page({
 
     millionAnswer.reportEvent(1,'xb00000100010001')
    
-    // setTimeout(() => {
-    //   millionAnswer.globalData.bgm.play()
-    // },200)
+    setTimeout(() => {
+      millionAnswer.globalData.bgm.play()
+    },200)
     
-    millionAnswer.globalData.bgm.play()
   },
   
   onUnload(){
@@ -48,7 +47,7 @@ Page({
   },
 
   onHide(){
-    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
 
   getUser(){ //获取用户答题信息

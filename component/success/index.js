@@ -373,7 +373,7 @@ Page({
     // prev.onLoad()
   },
   onHide(){
-    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
 
 
