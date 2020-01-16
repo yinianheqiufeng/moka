@@ -16,7 +16,7 @@
       <view bindtap="cj" class="list {{disabled ? 'grey' : ''}}"></view>
 
       <!-- 授权按钮,授权之后才可以抽奖 -->
-      <button class="lsbtn" open-type="getPhoneNumber" bindgetphonenumber="registerVip" hidden="{{!showBtn}}"></button>
+      <button class="lsbtn" open-type="getPhoneNumber" bindgetphonenumber="registerVip" wx:if="{{userData.is_vip != 1}}"></button>
 
       <block wx:for="{{prizeList}}" wx:key="index">
         <view class="list {{cjChange == index + 1 ? 'change_in' : ''}}">

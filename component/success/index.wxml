@@ -27,9 +27,14 @@
            <view class='reward-bg'>
               <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/tongguan-jiangli.png"></image>
               <image class='tikect' mode="aspectFit" src="{{gift.img}}"></image>
-              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip">
+
+              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip" wx:if="{{userData.is_vip != 1}}">
                  <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
               </button>
+              <button class='nowget' wx:else bindtap="lingqu">
+                 <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
+              </button>
+
               <image mode='aspectFit'  bindtap="closeGift" class='close-help' src='{{baseUrl}}/MiniProgram/images/close.png'></image>
            </view>
       </view>

@@ -37,7 +37,6 @@ Page({
     })
   },
 
-
   getGift(){  //获取礼品列表
     apiGetGift().then(res => {
       // console.log(res)
@@ -58,15 +57,23 @@ Page({
 
   useScore(){   //积分兑换礼品
     let id = this.data.detail.id
+
+     if(parseInt(this.data.userData.quantity) < parseInt(this.data.detail.integral)){
+        this.remind()
+        return
+      }
+
     apiScore({id}).then(res =>{
       if(res.error == 0){
         wx.showToast({
           title: '兑换成功',
         })
-        millionAnswer.refreshUserdata()
         this.setData({
-          showDetail:false
+          showDetail:false,
         })
+
+        this.getUser()
+        
       }else{
         wx.showToast({
           title: res.info,
@@ -82,12 +89,6 @@ Page({
     if(e.detail.iv){  //同意授权
       let { iv, encryptedData } = e.detail
 
-      
-      if(parseInt(this.data.userData.quantity) < parseInt(this.data.detail.integral)){
-        this.remind()
-        return
-      }
-
       // console.log('授权成为会员')
       
       if(this.data.userData.is_vip == 1){  //是否是会员 ，1 是 ,2 不是
@@ -100,7 +101,7 @@ Page({
           let params = { iv, encryptedData , openId,phone}
           millionAnswer.becomeVip(params)
           .then(res => {
-            millionAnswer.refreshUserdata()
+            this.getUser()
     
             let params = {}
             params.user_id = res.userId
@@ -108,7 +109,7 @@ Page({
     
             apiShenqing(params)   //申请会员后请求记录
             wx.switchTab({
-              url: '/pages/index/index?channel=300486',
+              url: '/pages/index/index',
             })
     
           })
@@ -131,13 +132,13 @@ Page({
   },
   goMoka(){
     wx.switchTab({
-      url: '/pages/index/index?channelNo=null&activityId=null&channel=300440',
+      url: '/pages/index/index',
     })
     millionAnswer.createEffect('click')
   },
   goJiayou(){
     wx.switchTab({
-      url: '/pages/index/index?channelNo=null&activityId=null&channel=300441',
+      url: '/pages/index/index',
     })
     millionAnswer.createEffect('click')
   },

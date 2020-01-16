@@ -204,11 +204,15 @@ Page({
             params.phone = res.phone ? res.phone : ''
     
             apiShenqing(params)   //申请会员后请求记录
-            wx.switchTab({
-              url: '/pages/index/index?channel=300485',
+            apiGetExchange({gift_id:this.data.gift.gift_id})   
+            .then(res => {
+                         
             })
 
-            // this.lingqu()  //券领取记录
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
+           
     
           })
         })

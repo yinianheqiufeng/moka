@@ -122,7 +122,10 @@
            <view class='reward-bg'>
               <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/tongguan-jiangli.png"></image>
               <image class='tikect' mode="aspectFit" src="{{gift.img}}"></image>
-              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip2">
+              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip2" wx:if="userData.is_vip !=1" >
+                 <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
+              </button>
+              <button class='nowget' bindtap="lingqu" wx:else >
                  <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
               </button>
 

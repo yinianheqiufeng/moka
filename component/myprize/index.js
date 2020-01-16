@@ -122,23 +122,22 @@ Page({
     })
   },
 
-  goMoka(){
+  goMoka(){   //兑换加油券
     millionAnswer.createEffect('click')
-    wx.navigateTo({
-      url: '/pages/index/index?channelNo=null&activityId=null&channel=300440',
+    wx.switchTab({
+      url: '/pages/index/index',
     })
   },
-  goJiayou(){
+  goJiayou(){  //8折加油
     millionAnswer.createEffect('click')
-    wx.navigateTo({
-      url: '/pages/index/index?channelNo=null&activityId=null&channel=300441',
+    wx.switchTab({
+      url: '/pages/index/index',
     })
     
   },
 
   goZhongjiang(e){   //跳转中奖记录
     millionAnswer.createEffect('click')
-
 
     if(this.data.type == 3){
       
@@ -147,8 +146,8 @@ Page({
 
 
       if(types == 1){  //MOKA券
-        wx.navigateTo({
-          url: '/pages/index/index?channelNo=null&activityId=null&channel=300440',
+        wx.switchTab({
+          url: '/pages/index/index',
         })
       }else if(types == 2){  //实物
 

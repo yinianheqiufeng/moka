@@ -88,7 +88,7 @@ Page({
     
             apiShenqing(params)   //申请会员后请求记录
             wx.switchTab({
-              url: '/pages/index/index?channel=300487',
+              url: '/pages/index/index',
             })
           })
         })

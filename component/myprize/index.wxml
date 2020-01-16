@@ -20,6 +20,8 @@
         </view>
 
        <scroll-view class="coupon-wrap" scroll-y="{{true}}">
+
+
         <view class="coupon-list flex" hidden="{{type != 1}}">
           <view class="coupon-item" wx:for="{{duihuanjilu}}" wx:key="index" >
             <!-- <image class='coupon' src='{{item.gift_img}}'></image>-->
@@ -40,10 +42,10 @@
            </view>
           </view>
         </view>
+
+
         <view class="coupon-list flex type2" hidden="{{type != 2}}">
           <view class="coupon-item" wx:for="{{tongguanjiangli}}" wx:key="index" data-id="{{item.id}}">
-            <!--<text>{{item.gift_name}}</text>-->
-            
             <view class="coupon-single">
               <image src="{{item.gift_img}}" class="gift-img" />
               <view class="flex">
@@ -62,10 +64,10 @@
 
           </view>
         </view>
+
+
         <view class="coupon-list flex type3" hidden="{{type != 3}}">
           <view class="coupon-item" wx:for="{{zhongjiangjilu}}" wx:key="index">
-            <!-- <image class='coupon' src='{{item.gift_img}}'></image> -->
-
              <view class="coupon-single">
               <view class="flex">
                <image src="{{item.config_prize.img}}" class="gift-img" />
@@ -84,6 +86,8 @@
             
           </view>
         </view>
+
+
       </scroll-view>
 
       </view>

@@ -499,10 +499,8 @@ haoyou 抽奖耗油量 */
   
           apiShenqing(params)   //申请会员后请求记录
           wx.switchTab({
-            url: '/pages/index/index?channelNo=null&activityId=null&channel=300439',
+            url: '/pages/index/index',
           })
-
-          // this.lingqu()  //券领取记录
   
         })
       })
@@ -584,11 +582,14 @@ haoyou 抽奖耗油量 */
             params.phone = res.phone ? res.phone : ''
     
             apiShenqing(params)   //申请会员后请求记录
-            wx.switchTab({
-              url: '/pages/index/index?channel=300485',
+
+            apiGetExchange({gift_id:this.data.gift.id})   
+            .then(res => {
             })
 
-            // this.lingqu()  //券领取记录
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
     
           })
         })
@@ -597,10 +598,10 @@ haoyou 抽奖耗油量 */
       }
 
     }else{  //拒绝授权
-      this.setData({
-        hasGift:false,
-        showSuccess:true
-      })
+      // this.setData({
+      //   hasGift:false,
+      //   showSuccess:true
+      // })
     }
     
   },
@@ -612,10 +613,6 @@ haoyou 抽奖耗油量 */
               title: '领取成功',
             })
           }else{
-            // wx.showToast({
-            //   title: res.info,
-            //   icon:'none'
-            // })
           }
 
           this.setData({
