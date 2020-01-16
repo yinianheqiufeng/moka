@@ -60,12 +60,6 @@ Page({
     })
   },
 
-  onCreatePoster() {  //生成海报
-    this.setData({ posterConfig: posterConfig }, () => {
-      Poster.create(true);    // 入参：true为抹掉重新生成
-    });
-  },
-
   getHaibao(){   //提交答案绑定用户的排名，没关所获 和 设置海报
     
     millionAnswer.buildCode().then(data => {  //先生成小程序二维码，再请求排名数据
@@ -132,189 +126,6 @@ Page({
           this.setData({ posterConfig: posterConfig }, () => {
             Poster.create(true);    // 入参：true为抹掉重新生成
           });
-      })
-
-      return
-      apiSubSubject({key,user_answer:answer}).then(res => {
-
-        if(res.error == 2){
-
-          let user = res.data
-          this.setData({
-            userData:res.data
-          })
-    
-          // console.log(user.pic)
-          // let posterConfig = {
-          //   width: 662,
-          //   height: 1003,
-          //   debug: false,
-          //   pixelRatio: 2,
-          //   blocks: [
-          //   ],
-          //   texts: [
-          //     {
-          //       x: 320,
-          //       y: 380,
-          //       width: 200,
-          //       baseLine: 'middle',
-          //       text: `${user.nickname}`,
-          //       textAlign:'center',
-          //       fontSize: 32,
-          //       color: '#ffffff',
-          //     },
-          //     {
-          //       x: 130,
-          //       y: 450,
-          //       baseLine: 'middle',
-          //       text: `总排名:`,
-          //       textAlign:'center',
-          //       fontSize: 28,
-          //       color: '#ffffff',
-          //     },
-          //     {
-          //       x: 190,
-          //       y: 450,
-          //       baseLine: 'middle',
-          //       text: `${user.allpai}名`,
-          //       fontSize: 30,
-          //       color: '#ffd924',
-          //     },
-          //     {
-          //       x: 460,
-          //       y: 450,
-          //       baseLine: 'middle',
-          //       text: `好友排名:`,
-          //       textAlign: 'center',
-          //       fontSize: 28,
-          //       color: '#ffffff',
-          //     },
-          //     {
-          //       x: 530,
-          //       y: 450,
-          //       baseLine: 'middle',
-          //       text: `${user.haoyoupai}名`,
-          //       fontSize: 30,
-          //       color: '#ffd924',
-          //     },
-          //     {
-          //       x: 228,
-          //       y: 745,
-          //       baseLine: 'middle',
-          //       text: `${user.cos}ml`,
-          //       fontSize:100,
-          //       color: '#ffd924',
-          //       textAlign: 'center',
-          //       fontWeight:'bold'
-          //     },
-          //     {
-          //       x: 170,
-          //       y: 630,
-          //       baseLine: 'middle',
-          //       text: `获得汽油`,
-          //       fontSize: 45,
-          //       color: '#fff',
-          //       textAlign: 'center',
-          //     },
-          //     {
-          //       x: 280,
-          //       y: 200,
-          //       fontSize: 26,
-          //       color: '#a90410',
-          //       text: `${this.data.lvtext[user.level - 1]}LV${user.lvy}`,
-          //       zIndex:10
-          //     },
-          //   ],
-          //   images: [
-          //     {
-          //       width: 662,
-          //       height: 1003,
-          //       x: 0,
-          //       y: 0,
-          //       url: `${baseUrl}/MiniProgram/images/poster/window3.png`,
-          //     },
-          //     {
-          //       width: 150,
-          //       height: 150,
-          //       x: 250,
-          //       y: 200,
-          //       borderRadius:150,
-          //       borderColor:'#fff',
-          //       borderWidth:4,
-          //       url: `${user.pic}`,
-          //     },
-          //     {
-          //       width: 80 * 1.4,
-          //       height: 43 * 1.4,
-          //       x: 275,
-          //       y: 160,
-          //       url: `${baseUrl}/MiniProgram/images/poslv.png`,
-          //     },
-          //     // {   //小程序二维码 测试测试
-          //     //   width: 120,
-          //     //   height: 120,
-          //       // x: 180,
-          //       // y: 845,
-          //     //   url: `${data.data.url}`,
-          //     // },
-          //   ]
-          // }
-
-          let pos1 = this.data.config[`shareposter${user.level}`]
-          console.log(pos1)
-
-           let posterConfig = {
-            width: 662,
-            height: 1003,
-            debug: false,
-            pixelRatio: 2,
-            texts: [
-              {  //昵称
-                x: 250,
-                y: 120,
-                width: 200,
-                baseLine: 'middle',
-                text: `${user.nickname}`,
-                textAlign:'center',
-                fontSize: 32,
-                color: '#333',
-              },
-            ],
-            images: [
-              {  //底图
-                width: 750,
-                height: 1127,
-                x: 0,
-                y: 0,
-                url: `${baseUrl}/MiniProgram/images/postem.jpg`,
-                // url: pos,
-              },
-              {  //头像
-                width: 150,
-                height: 150,
-                x: 45,
-                y: 50,
-                borderRadius:150,
-                borderColor:'#fff',
-                borderWidth:4,
-                url: `${user.pic}`,
-              },
-              {   //小程序二维码 
-                width: 120,
-                height: 120,
-                x: 560,
-                y: 950,
-                // url: `${data.data.url}`,
-                url: `${user.pic}`,
-              },
-            ]
-          }
-    
-          this.setData({ posterConfig: posterConfig }, () => {
-            Poster.create(true);    // 入参：true为抹掉重新生成
-          });
-        }
-     
       })
     })   
    
@@ -577,7 +388,7 @@ Page({
 
     return {
       title: millionAnswer.globalData.share.home_share_txt,   //标题
-      path: '/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
+      path: '/subPackages/activities/answer/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
       imageUrl: millionAnswer.globalData.share.home_share_img,   //分享图
     }
   },

@@ -10,7 +10,7 @@
 
 <!--<image class='save' mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/poster/changan.png"></image>--> 
 
-          <view class="save">“学富五车”就是你！ 长按存图炫耀一下！</view>
+          <view class="save">“长按屏幕保存图片，发个朋友圈炫耀一下吧”</view>
 
          <view class="btns">
                <button class='invitefriend' plain='true' open-type='share'>

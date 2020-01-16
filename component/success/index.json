@@ -2,5 +2,9 @@
   "usingComponents": {
     "poster": "/miniprogram_dist/poster/index",
     "my-component": "../title/index"
+  },
+  "window":{
+    "navigationBarTextStyle": "black",
+    "navigationStyle":"custom"
   }
 }

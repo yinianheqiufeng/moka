@@ -3,7 +3,7 @@
 import millionAnswer from '../../ownApi/millionAnswer'
 const baseUrl = millionAnswer.globalData.baseUrl
  
-import { apiGetSubject, apiGetConfig, apiSubSubject, apiFuhuo, apiGetUser ,apiShenqing} from '../../ownApi/index'
+import { apiGetSubject, apiGetConfig, apiSubSubject, apiFuhuo, apiGetUser ,apiShenqing ,apiGetExchange} from '../../ownApi/index'
 
 Page({  
   data: {
@@ -47,6 +47,7 @@ Page({
     showSuccess:false,
     hasGift:false,
     gift:{},
+    isJumpBanner:false,
   },
 
 /*获取配置 
@@ -374,14 +375,16 @@ haoyou 抽奖耗油量 */
   giveup(){   //放弃
     millionAnswer.createEffect('click')
     wx.redirectTo({
-      url: '/component/firstpage/index',
+      url: '../firstpage/index',
     })
   },
   clickBanner(){  //点击广告
     millionAnswer.createEffect('click')
 
     let ad = this.data.ad
-
+    // this.setData({
+    //   isJumpBanner:true
+    // })
     // wx.navigateTo({
     //   url: `/component/h5/index?url=https://www.baidu.com`,
     // })
@@ -395,6 +398,10 @@ haoyou 抽奖耗油量 */
       millionAnswer.reportEvent(3,'xb00000100080010',{
         desc:`Banner 的点击事件 - 跳H5`,
         url:ad.url
+      })
+
+      this.setData({
+        isJumpBanner:true
       })
     }else if(ad.types == 2){   //小程序
 
@@ -417,6 +424,9 @@ haoyou 抽奖耗油量 */
         }
       })
 
+      this.setData({
+        isJumpBanner:true
+      })
       
     }else if(ad.types == 3){  //文章
 
@@ -502,7 +512,7 @@ haoyou 抽奖耗油量 */
     this.getUser()
 
   },
-  registerVip(e){  //注册会员 立即领取优惠券
+  registerVip2(e){  //注册会员 立即领取优惠券
     millionAnswer.createEffect('click')
 
     if(e.detail.iv){  //同意授权
@@ -581,18 +591,54 @@ haoyou 抽奖耗油量 */
     this.getSubject()
     this.getUser()
 
-
     millionAnswer.reportEvent(1,'xb00000100060006',{
       page_id:'component/questions/index',
       desc:'答题页页面展现'
     })
 
-    if(!this.data.fail){  //接着上次计时
-      this.setData({
-        timeout:false,
-        fail:false
-      })
-      this.countDown()
+    // if(!this.data.fail){  //接着上次计时
+    //   this.setData({
+    //     timeout:false,
+    //     fail:false
+    //   })
+    //   this.countDown()
+    // }
+
+    if(wx.getStorageSync('time')){  //判断有没有保存时间戳
+      let now = new Date().getTime()
+      let count = wx.getStorageSync('count')
+      let time = wx.getStorageSync('time')
+
+      let cha = now - time
+      if(cha / 1000 > count){  //大于上次保存的秒数
+        this.setData({
+          timeout:true,
+          fail:true,
+          count:0,
+        })
+      }else{  //还在倒计时间内
+        if(!this.data.fail){  
+          count = parseInt( count - (cha / 1000))
+          
+          this.setData({
+            timeout:false,
+            fail:false,
+            count,
+          })
+          this.countDown()
+        }
+      }
+      
+      wx.setStorageSync('time',null)
+      wx.setStorageSync('count',15)
+    }else{
+      if(!this.data.fail){  //接着上次计时
+        this.setData({
+          timeout:false,
+          fail:false
+        })
+        this.countDown()
+      }
     }
 
     millionAnswer.createEffect('cj',true)  //暂停抽奖音乐
@@ -613,16 +659,21 @@ haoyou 抽奖耗油量 */
 
     millionAnswer.refreshUserdata()
 
-    // let pages = getCurrentPages(); 
-    // let l = pages.length; 
-    // let prev = pages[l - 2];
-    // prev.onLoad()
-
     if (!this.data.fail) {  //暂停计时
-      this.setData({
-        timeout: true,
-        fail:false
-      })
+      // this.setData({
+      //   timeout: true,
+      //   fail:false
+      // })
+      if(this.data.isJumpBanner){  //判断是否是点击banner跳转
+        this.setData({
+          timeout: true,
+          fail:false
+        })
+      }else{
+        let time = new Date().getTime()
+        wx.setStorageSync('time', time)
+        wx.setStorageSync('count', this.data.count)
+      }
     }
 
     if(this.data.checkTimer){  //清除等待好友复活的计时器
@@ -631,11 +682,24 @@ haoyou 抽奖耗油量 */
       // console.log(123)
     }
 
+    
+
   },
   /**
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
+
+    if(this.data.isJumpBanner){
+      if(!this.data.fail){  //接着上次计时
+        this.setData({
+          timeout:false,
+          fail:false,
+          isJumpBanner:false
+        })
+        this.countDown()
+      }
+    }
 
     setTimeout(() => {
       millionAnswer.globalData.bgm.play()
@@ -651,13 +715,14 @@ haoyou 抽奖耗油量 */
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    // if (!this.data.fail) {  //暂停计时
-    //   this.setData({
-    //     timeout: true,
-    //     fail:false
-    //   })
-    // }
+    if (!this.data.fail) {  //暂停计时
+      this.setData({
+        timeout: true,
+        fail:false
+      })
+    }
     millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+
 
     
   },
@@ -687,7 +752,7 @@ haoyou 抽奖耗油量 */
 
         return {
           title: shareText,   //标题
-          path: '/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
+          path: '/subPackages/activities/answer/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
           imageUrl: this.data.config[imgname],   //分享图
         }
       }else{
@@ -700,7 +765,7 @@ haoyou 抽奖耗油量 */
 
         return {
           title: millionAnswer.globalData.share.fail_share_txt,   //标题
-          path: '/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
+          path: '/subPackages/activities/answer/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
           imageUrl: millionAnswer.globalData.share.fail_share_img,   //分享图
         }
       }
@@ -708,7 +773,7 @@ haoyou 抽奖耗油量 */
     }else{
       return {
         title: millionAnswer.globalData.share.home_share_txt,   //标题
-        path: '/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
+        path: '/subPackages/activities/answer/component/firstpage/index?id=' + millionAnswer.globalData.userData.id,  //分享路径
         imageUrl: millionAnswer.globalData.share.home_share_img,   //分享图
       }
     }

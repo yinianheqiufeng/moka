@@ -40,8 +40,8 @@
       </button>
 
       <view class='banner' bindtap="clickBanner" hidden="{{!ad}}">
-             <image  mode="widthFix" src='{{ad.img}}'></image>
-         <!--  <image  mode="widthFix" src='https://ca.hj388.cn/yc/wei/upload/xiaochengxu/2020/01/15/15790624025079.jpg'></image>-->
+         <image  mode="widthFix" src='{{ad.img}}'></image>
+            <!--   <image  mode="widthFix" src='https://ca.hj388.cn/yc/wei/upload/xiaochengxu/2020/01/15/15790624025079.jpg'></image>-->
       </view>
 
       <!-- 失败弹窗 hidden='{{!fail}}'-->
@@ -119,7 +119,7 @@
            <view class='reward-bg'>
               <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/tongguan-jiangli.png"></image>
               <image class='tikect' mode="aspectFit" src="{{gift.img}}"></image>
-              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip">
+              <button class='nowget' open-type="getPhoneNumber" bindgetphonenumber="registerVip2">
                  <image mode="aspectFit" src="{{baseUrl}}/MiniProgram/images/award/zhong-shouxia.png"></image>
               </button>
 

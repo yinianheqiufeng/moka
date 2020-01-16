@@ -77,7 +77,10 @@ Page({
     })
   }else{
     millionAnswer.createEffect('click')
-    wx.reLaunch({
+    // wx.reLaunch({
+    //   url: '../questions/index',
+    // })
+    wx.navigateTo({
       url: '../questions/index',
     })
   }
@@ -141,7 +144,7 @@ Page({
   onShareAppMessage(res) {
     return {
       title: millionAnswer.globalData.share.home_share_txt,   //标题
-      path: '/component/firstpage/index?id=' + this.data.userData.id,  //分享路径
+      path: '/subPackages/activities/answer/component/firstpage/index?id=' + this.data.userData.id,  //分享路径
       imageUrl: millionAnswer.globalData.share.home_share_img,   //分享图
     }
   },

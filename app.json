@@ -18,8 +18,8 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "瓜分百万汽油",
-    "navigationBarTextStyle": "black",
     "navigationStyle":"custom"
+
   },
   "sitemapLocation": "sitemap.json"
 }

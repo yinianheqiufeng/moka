@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.4",
+	"libVersion": "2.10.0",
 	"appid": "wx6e9a03644210e511",
 	"projectname": "MiniProgram",
 	"debugOptions": {
