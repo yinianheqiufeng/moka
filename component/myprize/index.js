@@ -277,9 +277,6 @@ Page({
   },
   onShow(){
     millionAnswer.reportEvent(1,'xb00000100050005')
-    // if(millionAnswer.globalData.bgm.paused){   //是否在播放 true 已经暂停
-    //   millionAnswer.globalData.bgm.play()  //播放背景音乐
-    // }
     setTimeout(() => {
       millionAnswer.globalData.bgm.play()
     },200)
@@ -291,7 +288,7 @@ Page({
     millionAnswer.reportEvent(2,'xb00000100050005')
   },
   onHide(){
-    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
   /**
    * 用户点击右上角分享

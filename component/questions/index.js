@@ -1,5 +1,6 @@
 //index.js 
 //获取应用实例 
+import Poster from '../../miniprogram_dist/poster/poster';
 import millionAnswer from '../../ownApi/millionAnswer'
 const baseUrl = millionAnswer.globalData.baseUrl
  
@@ -48,7 +49,10 @@ Page({
     hasGift:false,
     gift:{},
     isJumpBanner:false,
-    hasTimer:false
+    hasTimer:false,
+    isPass:false,
+    showPoster:false,
+    poster:'',
   },
 
 /*获取配置 
@@ -93,6 +97,18 @@ haoyou 抽奖耗油量 */
       
     })
   },
+  onPosterSuccess(e) {
+    
+    wx.hideLoading()  //生成成功关闭loading
+    const { detail } = e;
+    this.setData({
+      poster:detail
+    })
+    
+  },
+  onPosterFail(err) {
+    console.error(err);
+  },
   setLv(){  //设置等级和题目数
     let key = this.data.configName.find(el => el == `lv${this.data.userData.level}_num`)
     let total = this.data.config[key]
@@ -125,6 +141,7 @@ haoyou 抽奖耗油量 */
         if(status == 1){
           
         }else if(status == 2){
+          // console.log('haha==getSub')
           this.setData({
             fail:true,
             timeout:true
@@ -182,7 +199,6 @@ haoyou 抽奖耗油量 */
       apiSubSubject({key,user_answer:answer})    //提交答案
       .then(res => {
         // console.log(res)
-        // if (answer == this.data.subject.answer) { } //答对
 
         if (res.error == '0') {  //答对
               millionAnswer.createEffect('right')
@@ -220,8 +236,11 @@ haoyou 抽奖耗油量 */
 
               
         }else if(res.error == '2' || res.error == 4){   //过关
-
-          // millionAnswer.createEffect('right')
+          this.setData({
+            answer,
+            // subject:res.data
+          })
+          millionAnswer.createEffect('right')
           millionAnswer.createEffect('success')
 
           millionAnswer.reportEvent(3,'xb00000100060010')
@@ -234,10 +253,21 @@ haoyou 抽奖耗油量 */
               gift.is_vip = res.data.gift.is_vip
               gift.key = key
               gift.answer = answer
-              let str = JSON.stringify(gift)
-              wx.redirectTo({
-                url: '../success/index?gift='+str,
+
+              wx.setStorageSync('time',null)
+              wx.setStorageSync('count',15)
+              this.setData({
+                isPass:true
               })
+
+              let str = JSON.stringify(gift)
+
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '../success/index?gift='+str,
+                })
+              },500)
+              
             }else{      //有券没升级只是过关的情况
               this.setData({
                 answer,
@@ -254,10 +284,20 @@ haoyou 抽奖耗油量 */
               let gift = {}
               gift.key = key
               gift.answer = answer
-              let str = JSON.stringify(gift)
-              wx.redirectTo({
-                url: '../success/index?gift='+str,
+
+              wx.setStorageSync('time',null)
+              wx.setStorageSync('count',15)
+              this.setData({
+                isPass:true
               })
+
+              let str = JSON.stringify(gift)
+              setTimeout(() => {
+                wx.redirectTo({
+                  url: '../success/index?gift='+str,
+                })
+              },500)
+
             }else{   //没券没升级只是过关的情况
               this.setData({
                 answer,
@@ -572,10 +612,10 @@ haoyou 抽奖耗油量 */
               title: '领取成功',
             })
           }else{
-            wx.showToast({
-              title: res.info,
-              icon:'none'
-            })
+            // wx.showToast({
+            //   title: res.info,
+            //   icon:'none'
+            // })
           }
 
           this.setData({
@@ -585,28 +625,136 @@ haoyou 抽奖耗油量 */
          
         })
   },
+  createPoster(){  //合成海报
+
+    millionAnswer.buildCode().then(data => {  //先生成小程序二维码，再生成
+
+      apiGetUser().then(res => {
+        let user = res.data
+        let rnum = parseInt(Math.random() * 3) + 1
+        let pos = this.data.config[`failposter${rnum}`]
+          console.log(pos)
+
+           let posterConfig = {
+            width: 750,
+            height: 1127,
+            debug: false,
+            pixelRatio: 2,
+            texts: [
+              {  //昵称
+                x: 290,
+                y: 120,
+                baseLine: 'middle',
+                text: `${user.nickname}`,
+                textAlign:'center',
+                fontSize: 30,
+                color: '#333',
+              },
+              {  //文案
+                x: 205,
+                y: 170,
+                baseLine: 'middle',
+                text: `老司机大作战，我已达到${this.data.lvtext[user.level - 1]}LV.${user.lvy}啦`,
+                fontSize: 30,
+                color: '#333',
+              },
+            ],
+            images: [
+              {  //底图
+                width: 750,
+                height: 1127,
+                x: 0,
+                y: 0,
+                // url: `${baseUrl}/MiniProgram/images/postem.jpg`,
+                url: pos,
+              },
+              {  //头像
+                width: 150,
+                height: 150,
+                x: 45,
+                y: 50,
+                borderRadius:150,
+                borderColor:'#fff',
+                borderWidth:4,
+                url: `${user.pic}`,
+              },
+              {   //小程序二维码 
+                width: 120,
+                height: 120,
+                x: 560,
+                y: 950,
+                url: `${data.data.url}`,
+                // url: `${user.pic}`,
+              },
+            ]
+          }
+    
+          this.setData({ posterConfig: posterConfig }, () => {
+            Poster.create(true);    // 入参：true为抹掉重新生成
+          });
+      })
+    })   
+   
+  },
   closeGift(){  //关闭券弹窗
+    millionAnswer.createEffect('click')
     this.setData({
       hasGift:false,
       showSuccess:true
     })
   },
+  checkPoster(){  //点击查看海报按钮
+    millionAnswer.createEffect('click')
+    this.setData({
+      showPoster:true,
+      fail:false
+    })
+
+    wx.showLoading({
+      title:'海报生成中...'
+    })
+
+    this.createPoster()
+  },
+  checkPoster2(){  //预览海报长按保存
+    wx.previewImage({
+      current: this.data.poster,
+      urls: [this.data.poster]
+    })
+
+    millionAnswer.reportEvent(3,'xb00000100200010')
+  },
+  closePoster(){  //关海报弹窗
+    millionAnswer.createEffect('click')
+    this.setData({
+      showPoster:false,
+      fail:true
+    })
+  },
   saveTime(){  //离开页面时保存时间戳
-    if (!this.data.fail) {  //没有失败，还在答题的情况，暂停计时
+    if (!this.data.fail && !this.data.hasGift && !this.data.showSuccess && !this.data.showPoster) {  //没有失败，还在答题的情况，暂停计时
         if(this.data.isJumpBanner){  //判断是否是点击banner跳转
           this.setData({
             timeout: true,
             fail:false
           })
         }else{
-          //保存时间和秒数
-          let time = new Date().getTime()
-          wx.setStorageSync('time', time)
-          wx.setStorageSync('count', this.data.count)
+          this.setData({
+            timeout:true
+          })
+          if(!this.data.isPass){
+            //保存时间和秒数
+            let time = new Date().getTime()
+            wx.setStorageSync('time', time)
+            wx.setStorageSync('count', this.data.count)
+          }
         }
       }
     },
   getTime(){  //获取和设置保存的时间戳
+
+    console.log('time ==='+ wx.getStorageSync('time'))
+
       if(wx.getStorageSync('time')){  //判断有没有保存时间戳
         let now = new Date().getTime()
         let count = wx.getStorageSync('count')
@@ -614,13 +762,14 @@ haoyou 抽奖耗油量 */
 
         let cha = now - time
         if(cha / 1000 > count){  //大于上次保存的秒数
+          // console.log('haha==gettime')
           this.setData({
             timeout:true,
             fail:true,
             count:0,
           })
         }else{  //还在倒计时间内
-          if(!this.data.fail){  
+          if(!this.data.fail && !this.data.hasGift && !this.data.showSuccess && !this.data.showPoster){  
             count = parseInt( count - (cha / 1000))
             
             this.setData({
@@ -635,8 +784,8 @@ haoyou 抽奖耗油量 */
         wx.setStorageSync('time',null)
         wx.setStorageSync('count',15)
       }else{
-        if(!this.data.fail){  //接着上次计时
-          this.setData({
+        if(!this.data.fail && !this.data.hasGift && !this.data.showSuccess && !this.data.showPoster){  
+          this.setData({//接着上次计时
             timeout:false,
             fail:false
           })
@@ -652,14 +801,6 @@ haoyou 抽奖耗油量 */
 
     millionAnswer.reportEvent(1,'xb00000100060006')
 
-    // if(!this.data.fail){  //接着上次计时
-    //   this.setData({
-    //     timeout:false,
-    //     fail:false
-    //   })
-    //   this.countDown()
-    // }
-
     this.getTime()
 
     millionAnswer.createEffect('cj',true)  //暂停抽奖音乐
@@ -668,30 +809,13 @@ haoyou 抽奖耗油量 */
     millionAnswer.reportEvent(1,'xb00000100060006')
   },
 
-
-  onUnload(){
-    millionAnswer.reportEvent(2,'xb00000100060006')
-
-    millionAnswer.refreshUserdata()
-
-    this.saveTime()
-
-    if(this.data.checkTimer){  //清除等待好友复活的计时器
-      clearInterval(this.data.checkTimer)
-    }else{
-      // console.log(123)
-    }
-
-    
-
-  },
   /**
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
 
     if(this.data.isJumpBanner){
-      if(!this.data.fail){  //接着上次计时
+      if(!this.data.fail && !this.data.hasGift && !this.data.showSuccess && !this.data.showPoster){  //接着上次计时
         this.setData({
           timeout:false,
           fail:false,
@@ -713,6 +837,20 @@ haoyou 抽奖耗油量 */
   
   },
 
+  onUnload(){
+    millionAnswer.reportEvent(2,'xb00000100060006')
+
+    millionAnswer.refreshUserdata()
+
+    this.saveTime()
+
+    if(this.data.checkTimer){  //清除等待好友复活的计时器
+      clearInterval(this.data.checkTimer)
+    }else{
+      // console.log(123)
+    }
+  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -720,8 +858,6 @@ haoyou 抽奖耗油量 */
     this.saveTime()
     
     // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
-
-
     
   },
   //分享，邀请好友

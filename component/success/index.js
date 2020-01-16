@@ -48,6 +48,8 @@ Page({
       current: this.data.poster,
       urls: [this.data.poster]
     })
+
+    millionAnswer.reportEvent(3,'xb00000100200010')
   },
 
   checContinue(){   //检测是否答完所有题
@@ -72,8 +74,6 @@ Page({
 
           let pos = this.data.config[`shareposter${user.level - 1}`]
           console.log(pos)
-          console.log(this.data.config)
-          console.log(`shareposter${user.level - 1}`)
 
            let posterConfig = {
             width: 750,
@@ -87,7 +87,15 @@ Page({
                 baseLine: 'middle',
                 text: `${user.nickname}`,
                 textAlign:'center',
-                fontSize: 32,
+                fontSize: 30,
+                color: '#333',
+              },
+              {  //文案
+                x: 205,
+                y: 170,
+                baseLine: 'middle',
+                text: `老司机大作战，我已达到${this.data.lvtext[user.level - 1]}LV.${user.lvy}啦`,
+                fontSize: 30,
                 color: '#333',
               },
             ],
@@ -115,8 +123,8 @@ Page({
                 height: 120,
                 x: 560,
                 y: 950,
-                // url: `${data.data.url}`,
-                url: `${user.pic}`,
+                url: `${data.data.url}`,
+                // url: `${user.pic}`,
               },
             ]
           }
@@ -279,7 +287,6 @@ Page({
     //   height: 1127,
     //   debug: false,
     //   pixelRatio: 2,
-    
     //   texts: [
     //     {  //昵称
     //       x: 250,
@@ -288,6 +295,14 @@ Page({
     //       baseLine: 'middle',
     //       text: `123`,
     //       textAlign:'center',
+    //       fontSize: 32,
+    //       color: '#333',
+    //     },
+    //     {  //文案
+    //       x: 220,
+    //       y: 170,
+    //       baseLine: 'middle',
+    //       text: `老司机大作战，我已达到XXXX啦`,
     //       fontSize: 32,
     //       color: '#333',
     //     },
@@ -358,7 +373,7 @@ Page({
     // prev.onLoad()
   },
   onHide(){
-    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
 
 

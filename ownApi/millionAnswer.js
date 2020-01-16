@@ -134,7 +134,7 @@ class MillionAnswer {
     buildCode() { //生成小程序码 
         return createQRCode({
             path: '/component/firstpage/index',
-            scene: `${this.globalData.id}`,
+            scene: ``,
             width: '200'
         })
     }

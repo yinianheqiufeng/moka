@@ -8,9 +8,7 @@
     "component/lottery/index", 
     "component/challenge/index",
     "component/rank/index",
-    
-
-    
+       
     "component/h5/index"        
   ],
   

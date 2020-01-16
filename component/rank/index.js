@@ -42,7 +42,7 @@ Page({
     millionAnswer.reportEvent(2,'xb00000100070007')
   },
   onHide(){
-    millionAnswer.globalData.bgm.pause()  //暂停背景音乐
+    // millionAnswer.globalData.bgm.pause()  //暂停背景音乐
   },
 
   getRank(){  //获取排行

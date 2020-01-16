@@ -321,6 +321,18 @@
 .nowget{position: absolute;width:331rpx;height: 81rpx;left: calc(50% - 165.5rpx);bottom: 11%}
 .reward-bg .close-help{right:15%;}
 
+.poster{
+  width:calc(662rpx * .9);
+  height:calc(1003rpx * .9);
+  margin:0 auto;
+}
+.pcenter{
+  top:53%;
+}
+.close-help.pbtn{
+  top:-70rpx;
+}
+
 @media screen and (min-height: 684px) {
  .sbox{
    margin-top: 80rpx;
