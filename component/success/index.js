@@ -90,14 +90,14 @@ Page({
                 fontSize: 30,
                 color: '#333',
               },
-              {  //文案
-                x: 205,
-                y: 170,
-                baseLine: 'middle',
-                text: `老司机大作战，我已达到${this.data.lvtext[user.level - 1]}LV.${user.lvy}啦`,
-                fontSize: 30,
-                color: '#333',
-              },
+              // {  //文案
+              //   x: 205,
+              //   y: 170,
+              //   baseLine: 'middle',
+              //   text: `老司机大作战，我已达到${this.data.lvtext[user.level - 1]}LV.${user.lvy}啦`,
+              //   fontSize: 30,
+              //   color: '#333',
+              // },
             ],
             images: [
               {  //底图
