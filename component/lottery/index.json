@@ -2,8 +2,6 @@
     "usingComponents": {
       "my-component": "../title/index"
     },
-    "window":{
       "navigationBarTextStyle": "black",
       "navigationStyle":"custom"
-    }
   }
