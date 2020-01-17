@@ -176,6 +176,7 @@ Page({
   },
   registerVip (e) { // 注册会员
     millionAnswer.createEffect('click')
+      millionAnswer.reportEvent(3,'xb00000100230001')
 
     if (e.detail.iv) { // 同意授权
       const { iv, encryptedData } = e.detail
@@ -197,6 +198,7 @@ Page({
                 params.phone = res.phone ? res.phone : ''
 
                 apiShenqing(params) // 申请会员后请求记录
+                millionAnswer.reportEvent(3,'xb00000100200001',{name:3})
                 wx.switchTab({
                   url: '/pages/index/index?channelNo=null&activityId=null&channel=300438'
                 })

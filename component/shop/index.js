@@ -63,6 +63,9 @@ Page({
         return
       }
 
+      let name = this.data.detail.name
+      millionAnswer.reportEvent(3,'xb00000100220001',{name:name})
+
     apiScore({id}).then(res =>{
       if(res.error == 0){
         wx.showToast({
@@ -108,6 +111,12 @@ Page({
             params.phone = res.phone ? res.phone : ''
     
             apiShenqing(params)   //申请会员后请求记录
+
+            let id = this.data.detail.id
+            apiScore({id}).then(res =>{
+              
+            })
+
             wx.switchTab({
               url: '/pages/index/index',
             })
@@ -137,12 +146,14 @@ Page({
     millionAnswer.createEffect('click')
   },
   goJiayou(){
+    millionAnswer.reportEvent(3,'xb00000100210001',{name:'8折加油'})
     wx.switchTab({
       url: '/pages/index/index',
     })
     millionAnswer.createEffect('click')
   },
   goChoujiang(){
+    millionAnswer.reportEvent(3,'xb00000100210001',{name:'抽飞天茅台'})
     wx.navigateTo({
       url: '../lottery/index',
     })
@@ -157,6 +168,8 @@ Page({
   },
 
   goMyprize() {   //前往我的奖品
+    millionAnswer.reportEvent(3,'xb00000100210001',{name:'我的奖品'})
+
     wx.navigateTo({
       url: '../myprize/index',
     })

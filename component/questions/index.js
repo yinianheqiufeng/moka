@@ -484,6 +484,8 @@ haoyou 抽奖耗油量 */
 
       let { iv, encryptedData } = e.detail
 
+      
+
       millionAnswer.getPhone({ iv, encryptedData })
       .then(result => {
         let openId = this.data.userData.openid
@@ -498,6 +500,8 @@ haoyou 抽奖耗油量 */
           params.phone = res.phone ? res.phone : ''
   
           apiShenqing(params)   //申请会员后请求记录
+          millionAnswer.reportEvent(3,'xb00000100200001',{name:3})
+
           wx.switchTab({
             url: '/pages/index/index',
           })
@@ -512,6 +516,7 @@ haoyou 抽奖耗油量 */
   },
   closeCard(){  //关闭复活卡弹窗
     millionAnswer.createEffect('click')
+    millionAnswer.reportEvent(3,'xb00000100200001',{name:1})
       this.setData({
         showCard:false,
         fail:true,

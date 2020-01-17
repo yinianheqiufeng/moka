@@ -58,7 +58,7 @@
         wx:if='{{userData.is_vip != 1}}'>
         <image src='{{baseUrl}}/MiniProgram/images/exchange/lijiduihuan.png'></image>
       </button>
-      <button bindtap='useScore' class='duihuan-button' plain='true' wx:else>
+      <button bindtap='useScore' class='duihuan-button' data-name="{{item.name}}" plain='true' wx:else>
         <image src='{{baseUrl}}/MiniProgram/images/exchange/lijiduihuan.png'></image>
       </button>
 
