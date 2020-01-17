@@ -1,5 +1,7 @@
-const http = `https://ca.hj388.cn/yc/wei/index.php/index/index/`
-const http2 = `https://ca.hj388.cn/yc/wei/index.php/index/login/`
+// const http = `https://ca.hj388.cn/yc/wei/index.php/index/index/`
+// const http2 = `https://ca.hj388.cn/yc/wei/index.php/index/login/`
+const http = `https://mgateway.yiche.com/wei/index.php/index/index/`
+const http2 = `https://mgateway.yiche.com/wei/index.php/index/login/`
 
 export const
 

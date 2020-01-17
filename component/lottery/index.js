@@ -243,6 +243,17 @@ Page({
       let userId = millionAnswer.globalData.userData.user_id
       let couponCode = this.prize.returndata
       millionAnswer.getCoupon({userId,couponCode})
+      .then(res => {
+        wx.showToast({
+          title:'领取成功'
+        })
+      })
+      .catch(err => {
+        wx.showToast({
+          title:'领取失败',
+          icon:'none'
+        })
+      })
     }
 
     this.setData({

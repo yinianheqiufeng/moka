@@ -208,9 +208,19 @@ Page({
               .then(res2 => {
                     let userId = res.userId
                     let couponCode = this.data.gift.apicode
-                    millionAnswer.getCoupon({userId,couponCode}).then(res3 => {
+                    millionAnswer.getCoupon({userId,couponCode})
+                    .then(res3 => {
+                      wx.showToast({
+                        title: '领取成功',
+                      })
                       wx.switchTab({
                         url: '/pages/index/index',
+                      })
+                    })
+                    .catch(err => {
+                      wx.showToast({
+                        title:'领取失败',
+                        icon:'none'
                       })
                     })    
               })
@@ -235,9 +245,23 @@ Page({
     apiGetExchange({gift_id:this.data.gift.gift_id})   
         .then(res => {
           if(res.error < 0){
-            wx.showToast({
-              title: '领取成功',
+            let userId = this.data.userData.user_id
+            let couponCode = this.data.gift.apicode
+            millionAnswer.getCoupon({userId,couponCode})
+            .then(res3 => {
+              wx.showToast({
+                title: '领取成功',
+              })
+              this.setData({
+                hasGift:false
+              })
             })
+            .catch(err => {
+              wx.showToast({
+                title:'领取失败',
+                icon:'none'
+              })
+            })    
           }else{
             // wx.showToast({
             //   title: res.info,
@@ -245,13 +269,9 @@ Page({
             // })
           }
 
-          let userId = this.data.userData.user_id
-          let couponCode = this.data.gift.apicode
-          millionAnswer.getCoupon({userId,couponCode})
+          
 
-          this.setData({
-            hasGift:false
-          })
+
          
         })
   },

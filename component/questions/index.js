@@ -594,12 +594,21 @@ haoyou 抽奖耗油量 */
               .then(res2 => {
                 let userId = res.userId
                 let couponCode = this.data.gift.apicode
-                millionAnswer.getCoupon({userId,couponCode}).then(res => {
+                millionAnswer.getCoupon({userId,couponCode})
+                .then(res => {
+                  wx.showToast({
+                    title:'领取成功'
+                  })
                   wx.switchTab({
                     url: '/pages/index/index',
                   })
                 })
-               
+                .catch(err => {
+                  wx.showToast({
+                    title:'领取失败',
+                    icon:'none'
+                  })
+                })               
               })
             })   //申请会员后请求记录
 
@@ -623,22 +632,29 @@ haoyou 抽奖耗油量 */
     apiGetExchange({gift_id:this.data.gift.id})   
         .then(res => {
           if(res.error < 0){
-            wx.showToast({
-              title: '领取成功',
+            let userId = this.data.userData.user_id
+            let couponCode = this.data.gift.apicode
+            millionAnswer.getCoupon({userId,couponCode})
+            .then(res2 => {
+              wx.showToast({
+                title:'领取成功'
+              })
+              this.setData({
+                hasGift:false,
+                showSuccess:true
+              })
             })
+            .catch(err => {
+              wx.showToast({
+                title:'领取失败',
+                icon:'none'
+              })
+            })    
           }else{
-          }
-
-          this.setData({
-            hasGift:false,
-            showSuccess:true
-          })
-         
+          }         
         })
 
-        let userId = this.data.userData.user_id
-        let couponCode = this.data.gift.apicode
-        millionAnswer.getCoupon({userId,couponCode})
+        
   },
   createPoster(){  //合成海报
 

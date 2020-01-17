@@ -68,16 +68,25 @@ Page({
 
     apiScore({id}).then(res =>{
       if(res.error == 0){
-        wx.showToast({
-          title: '兑换成功',
-        })
-        this.setData({
-          showDetail:false,
-        })
+       
 
         let userId = this.data.userData.user_id
         let couponCode = this.data.detail.apicode
         millionAnswer.getCoupon({userId,couponCode}) 
+        .then(res2 => {
+          wx.showToast({
+            title: '兑换成功',
+          })
+          this.setData({
+            showDetail:false,
+          })
+        })
+        .catch(err => {
+          wx.showToast({
+            title:'领取失败',
+            icon:'none'
+          })
+        })  
 
         this.getUser()
         
@@ -119,11 +128,22 @@ Page({
               apiScore({id}).then(res2 =>{
                 let userId = res.userId
                 let couponCode = this.data.detail.apicode
-                millionAnswer.getCoupon({userId,couponCode}).then(res3 => {
+                millionAnswer.getCoupon({userId,couponCode})
+                .then(res2 => {
+                  wx.showToast({
+                    title: '兑换成功',
+                  })
                   wx.switchTab({
                     url: '/pages/index/index',
                   })
                 })
+                .catch(err => {
+                  wx.showToast({
+                    title:'领取失败',
+                    icon:'none'
+                  })
+                })  
+              
               })
             })   //申请会员后请求记录
 
