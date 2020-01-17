@@ -75,6 +75,10 @@ Page({
           showDetail:false,
         })
 
+        let userId = this.data.userData.user_id
+        let couponCode = this.data.detail.apicode
+        millionAnswer.getCoupon({userId,couponCode}) 
+
         this.getUser()
         
       }else{
@@ -112,8 +116,12 @@ Page({
     
             apiShenqing(params)   //申请会员后请求记录
 
+            let userId = res.userId
+            let couponCode = this.data.detail.apicode
+            millionAnswer.getCoupon({userId,couponCode}) 
+
             let id = this.data.detail.id
-            apiScore({id}).then(res =>{
+            apiScore({id}).then(res2 =>{
               
             })
 

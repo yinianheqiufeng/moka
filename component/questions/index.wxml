@@ -100,7 +100,7 @@
       </view>
         
       <!-- 成功弹窗 -->
-      <view class="mask success" hidden="{{!showSuccess}}">
+      <view class="mask success" hidden="{{showSuccess}}">
             <view class="center">
                   <image class="success-k" src="{{baseUrl}}MiniProgram/images/poster/suc-widnow.png" />
                   <text class="you">{{userData2.cos}}ml</text>

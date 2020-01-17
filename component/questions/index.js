@@ -251,6 +251,7 @@ haoyou 抽奖耗油量 */
               gift.gift_id = res.data.gift.id
               gift.img = res.data.gift.img
               gift.is_vip = res.data.gift.is_vip
+              gift.apicode = res.data.gift.apicode
               gift.key = key
               gift.answer = answer
 
@@ -589,7 +590,10 @@ haoyou 抽奖耗油量 */
             apiShenqing(params)   //申请会员后请求记录
 
             apiGetExchange({gift_id:this.data.gift.id})   
-            .then(res => {
+            .then(res2 => {
+              let userId = res.userId
+              let couponCode = this.data.gift.apicode
+              millionAnswer.getCoupon({userId,couponCode})
             })
 
             wx.switchTab({
@@ -626,6 +630,10 @@ haoyou 抽奖耗油量 */
           })
          
         })
+
+        let userId = this.data.userData.user_id
+        let couponCode = this.data.gift.apicode
+        millionAnswer.getCoupon({userId,couponCode})
   },
   createPoster(){  //合成海报
 

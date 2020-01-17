@@ -301,6 +301,7 @@
   position: absolute;
   top: 35%;
   width: 100%;
+  z-index:100;
 }
 .suc-btns{
   position: absolute;
