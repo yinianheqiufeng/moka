@@ -114,21 +114,19 @@ Page({
             params.user_id = res.userId
             params.phone = res.phone ? res.phone : ''
     
-            apiShenqing(params)   //申请会员后请求记录
+            apiShenqing(params).then(data => {
+              let id = this.data.detail.id
+              apiScore({id}).then(res2 =>{
+                let userId = res.userId
+                let couponCode = this.data.detail.apicode
+                millionAnswer.getCoupon({userId,couponCode}).then(res3 => {
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  })
+                })
+              })
+            })   //申请会员后请求记录
 
-            let userId = res.userId
-            let couponCode = this.data.detail.apicode
-            millionAnswer.getCoupon({userId,couponCode}) 
-
-            let id = this.data.detail.id
-            apiScore({id}).then(res2 =>{
-              
-            })
-
-            wx.switchTab({
-              url: '/pages/index/index',
-            })
-    
           })
         })
       }

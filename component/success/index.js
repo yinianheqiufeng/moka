@@ -203,19 +203,19 @@ Page({
             params.user_id = res.userId
             params.phone = res.phone ? res.phone : ''
     
-            apiShenqing(params)   //申请会员后请求记录
+            apiShenqing(params).then(data => {
+              apiGetExchange({gift_id:this.data.gift.gift_id})   
+              .then(res2 => {
+                    let userId = res.userId
+                    let couponCode = this.data.gift.apicode
+                    millionAnswer.getCoupon({userId,couponCode}).then(res3 => {
+                      wx.switchTab({
+                        url: '/pages/index/index',
+                      })
+                    })    
+              })
 
-            apiGetExchange({gift_id:this.data.gift.gift_id})   
-            .then(res2 => {
-                  let userId = res.userId
-                  let couponCode = this.data.gift.apicode
-                  millionAnswer.getCoupon({userId,couponCode})    
-            })
-
-            wx.switchTab({
-              url: '/pages/index/index',
-            })
-           
+            })   //申请会员后请求记录
     
           })
         })

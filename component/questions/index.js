@@ -500,12 +500,14 @@ haoyou 抽奖耗油量 */
           params.user_id = res.userId
           params.phone = res.phone ? res.phone : ''
   
-          apiShenqing(params)   //申请会员后请求记录
+          apiShenqing(params).then(res => {
+            wx.switchTab({
+              url: '/pages/index/index',
+            })
+          })   //申请会员后请求记录
           millionAnswer.reportEvent(3,'xb00000100200001',{name:3})
 
-          wx.switchTab({
-            url: '/pages/index/index',
-          })
+          
   
         })
       })
@@ -587,18 +589,21 @@ haoyou 抽奖耗油量 */
             params.user_id = res.userId
             params.phone = res.phone ? res.phone : ''
     
-            apiShenqing(params)   //申请会员后请求记录
+            apiShenqing(params).then(data => {
+              apiGetExchange({gift_id:this.data.gift.id})   
+              .then(res2 => {
+                let userId = res.userId
+                let couponCode = this.data.gift.apicode
+                millionAnswer.getCoupon({userId,couponCode}).then(res => {
+                  wx.switchTab({
+                    url: '/pages/index/index',
+                  })
+                })
+               
+              })
+            })   //申请会员后请求记录
 
-            apiGetExchange({gift_id:this.data.gift.id})   
-            .then(res2 => {
-              let userId = res.userId
-              let couponCode = this.data.gift.apicode
-              millionAnswer.getCoupon({userId,couponCode})
-            })
-
-            wx.switchTab({
-              url: '/pages/index/index',
-            })
+            
     
           })
         })

@@ -138,9 +138,7 @@ class MillionAnswer {
     }
 
     getCoupon(params){   //请求发放MOKA券
-        giveCoupon(params).then(res => {
-            
-        })
+        return giveCoupon(params)
     }
 
     reportEvent(num, eventId, params = {}) { //埋点事件 num = 1 进入页面上报，num = 2 离开页面上报 , num = 3 , 点击上报
