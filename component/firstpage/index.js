@@ -102,12 +102,12 @@ Page({
           const data = res3
           const params = {}
 
-          params.openid = res2.data.openId
-          params.nickName = data.nickName
-          params.avatarUrl = data.avatarUrl
+          params.openid = res2.data.openId || ''
+          params.nickName = data.nickName || ''
+          params.avatarUrl = data.avatarUrl || ''
           params.memberFlag = data.memberFlag
-          params.userId = data.memberFlag ? data.userId : null
-          params.pid = pid
+          params.userId = data.memberFlag ? data.userId : ''
+          params.pid = pid || ''
           this.markUser(params)
 
           if (pid > 0) {
@@ -164,11 +164,11 @@ Page({
           const data = res.data
           const params = {}
           params.openid = data.openid
-          params.nickName = data.nickname
-          params.avatarUrl = data.pic
+          params.nickName = data.nickname || ''
+          params.avatarUrl = data.pic || ''
           params.memberFlag = data.is_vip == 1
-          params.userId = data.is_vip == 1 ? data.user_id : null
-          params.pid = pid
+          params.userId = data.is_vip == 1 ? data.user_id : ''
+          params.pid = pid || ''
           this.markUser(params)
         }
       }
