@@ -132,7 +132,10 @@ Page({
     apiGetUser({ pid }).then(res => {
       if (res.error == 606) { // 没有用户缓存  测试
         this.getOpenId2(pid)
-      } else {
+      } else if(res.error == -1){
+          wx.setStorageSync('sign', '')
+          this.getOpenId2(pid)
+      }else {
         const you = parseInt(res.data.quantity)
         let text = ''
         if (you > 999) {
