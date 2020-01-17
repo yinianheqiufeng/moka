@@ -47,8 +47,9 @@
         <view class="coupon-list flex type2" hidden="{{type != 2}}">
           <view class="coupon-item" wx:for="{{tongguanjiangli}}" wx:key="index" data-id="{{item.id}}">
             <view class="coupon-single">
-              <image src="{{item.gift_img}}" class="gift-img" />
+            
               <view class="flex">
+                <image src="{{item.gift_img}}" class="gift-img" />
                 <view class="right">
                   {{item.gift_name}}
                 </view>

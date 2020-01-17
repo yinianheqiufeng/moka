@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "poster": "/miniprogram_dist/poster/index",
+    "poster": "../../miniprogram_dist/poster/index",
     "my-component": "../title/index"
   },
     "navigationBarTextStyle": "black",

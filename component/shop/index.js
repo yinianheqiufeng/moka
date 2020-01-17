@@ -66,19 +66,28 @@ Page({
       let name = this.data.detail.name
       millionAnswer.reportEvent(3,'xb00000100220001',{name:name})
 
-    apiScore({id}).then(res =>{
-      if(res.error == 0){
-       
-
-        let userId = this.data.userData.user_id
-        let couponCode = this.data.detail.apicode
-        millionAnswer.getCoupon({userId,couponCode}) 
+      let userId = this.data.userData.user_id
+      let couponCode = this.data.detail.apicode
+      millionAnswer.getCoupon({userId,couponCode}) 
         .then(res2 => {
           wx.showToast({
             title: '兑换成功',
           })
           this.setData({
             showDetail:false,
+          })
+
+          apiScore({id}).then(res =>{
+            if(res.error == 0){
+             
+              this.getUser()
+              
+            }else{
+              // wx.showToast({
+              //   title: res.info,
+              //   icon:'none'
+              // })
+            }
           })
         })
         .catch(err => {
@@ -88,15 +97,7 @@ Page({
           })
         })  
 
-        this.getUser()
-        
-      }else{
-        wx.showToast({
-          title: res.info,
-          icon:'none'
-        })
-      }
-    })
+    
   },
 
   registerVip(e) {  //注册会员
@@ -124,18 +125,21 @@ Page({
             params.phone = res.phone ? res.phone : ''
     
             apiShenqing(params).then(data => {
-              let id = this.data.detail.id
-              apiScore({id}).then(res2 =>{
-                let userId = res.userId
-                let couponCode = this.data.detail.apicode
-                millionAnswer.getCoupon({userId,couponCode})
+              let userId = res.userId
+              let couponCode = this.data.detail.apicode
+              millionAnswer.getCoupon({userId,couponCode})
                 .then(res2 => {
-                  wx.showToast({
-                    title: '兑换成功',
+                 
+                  let id = this.data.detail.id
+                  apiScore({id}).then(res2 =>{
+                    wx.showToast({
+                      title: '兑换成功',
+                    })
+                    wx.switchTab({
+                      url: '/pages/index/index',
+                    })
                   })
-                  wx.switchTab({
-                    url: '/pages/index/index',
-                  })
+                 
                 })
                 .catch(err => {
                   wx.showToast({
@@ -144,7 +148,6 @@ Page({
                   })
                 })  
               
-              })
             })   //申请会员后请求记录
 
           })
